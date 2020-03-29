@@ -8,14 +8,14 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>插入排序 | Jianhua Luo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="插入排序 插入排序，实质上是向一组已经有序的数组里面插入元素。举个栗子，就像打扑克牌起牌一样，你手上已经有一堆牌，并且你已经排好序，这时候你又起一张牌，并且要将他插入“合适的位置”。如果待插入的元素比最后一个元素大，那么直接插入即可，如果比最后一个元素小，那么他将向左移，继续比较。直到他比那个元素大，那么将其插入。当然，我们要备份插入的那个元素，以免比它大的元素在后移过程中，破坏了该元素。  12">
+  <meta name="description" content="插入排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="插入排序">
 <meta property="og:url" content="http://yoursite.com/2020/03/29/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Jianhua Luo的博客">
-<meta property="og:description" content="插入排序 插入排序，实质上是向一组已经有序的数组里面插入元素。举个栗子，就像打扑克牌起牌一样，你手上已经有一堆牌，并且你已经排好序，这时候你又起一张牌，并且要将他插入“合适的位置”。如果待插入的元素比最后一个元素大，那么直接插入即可，如果比最后一个元素小，那么他将向左移，继续比较。直到他比那个元素大，那么将其插入。当然，我们要备份插入的那个元素，以免比它大的元素在后移过程中，破坏了该元素。  12">
+<meta property="og:description" content="插入排序">
 <meta property="article:published_time" content="2020-03-28T16:01:49.000Z">
-<meta property="article:modified_time" content="2020-03-29T09:57:43.216Z">
+<meta property="article:modified_time" content="2020-03-29T10:54:22.018Z">
 <meta property="article:author" content="Jianhua Luo">
 <meta property="article:tag" content="排序算法">
 <meta name="twitter:card" content="summary">
@@ -47,7 +47,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="https://avatars0.githubusercontent.com/u/60779577?v=4" class="js-avatar">
+			<img src="/assets/img/head.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Jianhua Luo</a></h1>
@@ -85,11 +85,7 @@
 				
 					<a class="github" target="_blank" href="https://github.com/JHL1998" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-		        
-					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+					<a class="weibo" target="_blank" href="https://weibo.com/5462369587/profile?rightmod=1&wvr=6&mod=personinfo" title="weibo"><i class="icon-weibo"></i></a>
 		        
 			</div>
 		</nav>
@@ -107,7 +103,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="https://avatars0.githubusercontent.com/u/60779577?v=4" class="js-avatar">
+				<img src="/assets/img/head.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Jianhua Luo</h1>
@@ -128,11 +124,7 @@
 					
 						<a class="github" target="_blank" href="https://github.com/JHL1998" title="github"><i class="icon-github"></i></a>
 			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-			        
-						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+						<a class="weibo" target="_blank" href="https://weibo.com/5462369587/profile?rightmod=1&wvr=6&mod=personinfo" title="weibo"><i class="icon-weibo"></i></a>
 			        
 				</div>
 			</nav>
@@ -178,7 +170,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><ul>
+        <h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><a id="more"></a>
+
+<ul>
 <li>插入排序，实质上是向一组已经有序的数组里面插入元素。举个栗子，就像打扑克牌起牌一样，你手上已经有一堆牌，并且你已经排好序，这时候你又起一张牌，并且要将他插入“合适的位置”。如果待插入的元素比最后一个元素大，那么直接插入即可，如果比最后一个元素小，那么他将向左移，继续比较。直到他比那个元素大，那么将其插入。当然，我们要备份插入的那个元素，以免比它大的元素在后移过程中，破坏了该元素。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> arr[]= &#123;<span class="number">1</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">15</span>,<span class="number">41</span>,<span class="number">34</span>,<span class="number">76</span>,<span class="number">52</span>,<span class="number">11</span>,<span class="number">2</span>,<span class="number">10</span>&#125;;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">			<span class="keyword">int</span> cur=i;</span><br><span class="line">			<span class="comment">//先将cur位置的元素备份出来</span></span><br><span class="line">			<span class="keyword">int</span> elements=arr[cur];</span><br><span class="line">			<span class="comment">//如果待插入的元素比cur前一个位置元素小，就让该元素往后移</span></span><br><span class="line">			<span class="keyword">while</span>( cur&gt;<span class="number">0</span> &amp;&amp; elements&lt;arr[cur-<span class="number">1</span>]) &#123;</span><br><span class="line">				arr[cur]=arr[cur-<span class="number">1</span>];</span><br><span class="line">				cur--;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//此时再将待插入的元素插进去。</span></span><br><span class="line">			arr[cur]=elements;</span><br><span class="line">		       &#125;</span><br><span class="line">		<span class="keyword">for</span>(Integer nums:arr) &#123;</span><br><span class="line">			System.out.println(nums);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -214,9 +208,14 @@
             <span class="tooltip-content">
               <span class="tooltip-text">
                 <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝奶茶<i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
                     
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
                     
                   </div>
                 </span>
