@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>快速排序 | Jianhua Luo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="快速排序 从序列中选择一个轴点元素，我们一般把0号位置的元素当成轴点元素 利用轴点元素，将序列分割成两个子序列 将小于轴点的元素放在轴点的左边 将大于轴点的元素放在轴点的右边 等于轴点的元素放在左边或者右边都可以   然后再对子序列进行上述的操作，直到不能再分割位置（即子序列中只剩下一个元素）  很明显，快速排序的本质就是：逐渐的将每一个元素都变成轴点元素，当然，也就排好序了。我们不必关心每一步是">
+  <meta name="description" content="快速排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="快速排序">
 <meta property="og:url" content="http://yoursite.com/2020/03/30/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Jianhua Luo的博客">
-<meta property="og:description" content="快速排序 从序列中选择一个轴点元素，我们一般把0号位置的元素当成轴点元素 利用轴点元素，将序列分割成两个子序列 将小于轴点的元素放在轴点的左边 将大于轴点的元素放在轴点的右边 等于轴点的元素放在左边或者右边都可以   然后再对子序列进行上述的操作，直到不能再分割位置（即子序列中只剩下一个元素）  很明显，快速排序的本质就是：逐渐的将每一个元素都变成轴点元素，当然，也就排好序了。我们不必关心每一步是">
+<meta property="og:description" content="快速排序">
 <meta property="og:image" content="http://yoursite.com/2020/03/30/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/assets/quick.png">
 <meta property="article:published_time" content="2020-03-30T09:44:39.000Z">
-<meta property="article:modified_time" content="2020-03-30T09:45:48.725Z">
+<meta property="article:modified_time" content="2020-03-30T11:59:44.032Z">
 <meta property="article:author" content="Jianhua Luo">
 <meta property="article:tag" content="排序算法">
 <meta name="twitter:card" content="summary">
@@ -55,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Jianhua Luo</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">菜鸟程序员的记录</p>
+		<p class="header-subtitle">a noob programmer</p>
 		
 
 		<nav class="header-menu">
@@ -109,7 +109,7 @@
 			  <h1 class="header-author js-header-author">Jianhua Luo</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>菜鸟程序员的记录<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>a noob programmer<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -170,7 +170,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><ul>
+        <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><a id="more"></a>
+
+<ul>
 <li>从序列中选择一个轴点元素，我们一般把0号位置的元素当成轴点元素</li>
 <li>利用轴点元素，将序列分割成两个子序列<ul>
 <li>将小于轴点的元素放在轴点的左边</li>
