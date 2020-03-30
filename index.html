@@ -147,6 +147,118 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-快速排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/30/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/30/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2020-03-30T09:44:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><ul>
+<li>从序列中选择一个轴点元素，我们一般把0号位置的元素当成轴点元素</li>
+<li>利用轴点元素，将序列分割成两个子序列<ul>
+<li>将小于轴点的元素放在轴点的左边</li>
+<li>将大于轴点的元素放在轴点的右边</li>
+<li>等于轴点的元素放在左边或者右边都可以</li>
+</ul>
+</li>
+<li>然后再对子序列进行上述的操作，直到不能再分割位置（即子序列中只剩下一个元素）</li>
+</ul>
+<p>很明显，快速排序的本质就是：<strong>逐渐的将每一个元素都变成轴点元素</strong>，当然，也就排好序了。我们不必关心每一步是怎样进行的，即我们只用管第一次选择的轴点元素，然后进行递归调用就行。</p>
+<p>快速排序中的end初始位置默认指向最后一位元素</p>
+<p>这与我们之前在插入排序和归并排序中的不一样，当然，这是我们故意设计的 。我们还是可以对[begin,end)位置元素进行快速排序，递归调用，只需要在开始的时候将end指针左移一位。<img src="assets/quick.png" alt="quick"></p>
+<p>我们构造[begin,end）位置的轴点元素，如上图所示。</p>
+<ul>
+<li>首先我们先备份出begin位置的元素，以免被破坏</li>
+<li>这时候我们选择从右边开始扫描，比较end位置元素与轴点元素大小  如果end&gt;pivot 此时只需要让end指针往左移一位，然后继续比较。</li>
+<li>当出现end &lt; pivot时，我们将end元素覆盖到begin位置，让begin指针往右移动一位。然后从左往右扫描</li>
+<li>在最开始的时候，我们有介绍到，如果碰到与轴点元素相等的元素，我们可以不作处理。但是为了方便，我们需要做出调整。<strong>当碰到与轴点元素相等时，我们交换扫描方向</strong>.</li>
+</ul>
+<p><strong>快速排序与归并排序都有类似之处，即他们都是递归操作</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickSort</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * 对[begin,end)范围内的元素进行快速排序</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> begin,<span class="keyword">int</span> end,<span class="keyword">int</span> arr[])</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(end-begin&lt;<span class="number">2</span>) <span class="keyword">return</span> ;</span><br><span class="line">		<span class="comment">//确定轴点位置</span></span><br><span class="line">		<span class="keyword">int</span> mid=pivotIndex(begin,end,arr);</span><br><span class="line">		<span class="comment">//对子序列进行快速排序，递归调用</span></span><br><span class="line">		sort(begin,mid,arr);</span><br><span class="line">		sort(mid+<span class="number">1</span>,end,arr);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * 构造出[begin,end)范围的轴点元素</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 返回轴点元素的位置， 即当begin=end的位置</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span>  <span class="keyword">int</span> <span class="title">pivotIndex</span><span class="params">(<span class="keyword">int</span> begin,<span class="keyword">int</span> end,<span class="keyword">int</span> arr[])</span> </span>&#123;</span><br><span class="line">		<span class="comment">//首先备份begin位置的元素</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> pivot=arr[begin];</span><br><span class="line">		<span class="comment">//由于此时end为最后一个元素的下一个位置，我们需要将end往前挪动一位</span></span><br><span class="line">		end--;</span><br><span class="line">		<span class="keyword">while</span>(begin&lt;end) &#123;</span><br><span class="line">			<span class="comment">//从右往左</span></span><br><span class="line">			<span class="keyword">while</span>(begin&lt;end) &#123;</span><br><span class="line">        <span class="comment">//右边元素&gt;轴点元素</span></span><br><span class="line">				<span class="keyword">if</span>(arr[end]&gt;pivot) &#123;</span><br><span class="line">					end--;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">//右边元素&lt;=轴点元素</span></span><br><span class="line">					arr[begin]=arr[end];</span><br><span class="line">					begin++;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//从左往右</span></span><br><span class="line">			<span class="keyword">while</span>(begin&lt;end) &#123;</span><br><span class="line">				<span class="keyword">if</span>(pivot&gt;arr[begin]) &#123;</span><br><span class="line">					begin++;</span><br><span class="line">				&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">					arr[end]=arr[begin];</span><br><span class="line">					end--;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">    <span class="comment">//将轴点元素放在最终的位置</span></span><br><span class="line">		arr[begin]=pivot;</span><br><span class="line">		<span class="comment">//此时begin=end ,返回轴点元素的位置</span></span><br><span class="line">		<span class="keyword">return</span> begin;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> arr[]=&#123;<span class="number">1</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">19</span>,<span class="number">23</span>,<span class="number">54</span>,<span class="number">21</span>,<span class="number">17</span>&#125;;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">new</span> QuickSort().sort(<span class="number">0</span>, arr.length, arr);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(Integer nums:arr) &#123;</span><br><span class="line">			System.out.println(nums);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码如上所示，快速排序到这里就已经实现啦！！！</p>
+<h3 id="快速排序的时间复杂度"><a href="#快速排序的时间复杂度" class="headerlink" title="快速排序的时间复杂度"></a>快速排序的时间复杂度</h3><p>我们将确定轴点位置元素的过程理解为一次遍历操作，为O(n)的时间复杂度，那么与归并排序类似</p>
+<p>T(n)=2*T(n/2)+O(n)  我们也可以推算出来快速排序的时间复杂度为O(nlogn).</p>
+<p>当然，这是最好的情况下，即左右两边元素都是均匀的情况下，时间复杂度为O(nlogn)。</p>
+<ul>
+<li>想象一下最坏的情况，即轴点元素极度不均匀的情况下，</li>
+</ul>
+<p>T(n)=T(n-1)+O(n) 此时时间复杂度为O(n^2)。  这样看来，我们并没有归并排序那样优秀，毕竟归并排序的平均时间复杂度都是O(nlogn)。</p>
+<p><strong>此时我们将提供一种快速排序的优化实现.</strong></p>
+<h2 id="快速排序优化"><a href="#快速排序优化" class="headerlink" title="快速排序优化"></a>快速排序优化</h2><ul>
+<li><strong>为了降低最坏情况的出现概率，我们一般采取随机选择轴点元素</strong></li>
+</ul>
+<p>即我们在构造轴点元素时，随机选择一个元素与begin位置进行交换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickSort_</span>优化 </span>&#123;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * 对[begin,end)范围内的元素进行快速排序</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> begin,<span class="keyword">int</span> end,<span class="keyword">int</span> arr[])</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(end-begin&lt;<span class="number">2</span>) <span class="keyword">return</span> ;</span><br><span class="line">		<span class="comment">//确定轴点位置</span></span><br><span class="line">		<span class="keyword">int</span> mid=pivotIndex(begin,end,arr);</span><br><span class="line">		<span class="comment">//对子序列进行快速排序，递归调用</span></span><br><span class="line">		sort(begin,mid,arr);</span><br><span class="line">		sort(mid+<span class="number">1</span>,end,arr);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * 构造出[begin,end)范围的轴点元素</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 返回轴点元素的位置， 即当begin=end的位置</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span>  <span class="keyword">int</span> <span class="title">pivotIndex</span><span class="params">(<span class="keyword">int</span> begin,<span class="keyword">int</span> end,<span class="keyword">int</span> arr[])</span> </span>&#123;</span><br><span class="line">		<span class="comment">//随机选择一个元素跟begin位置进行交换</span></span><br><span class="line">		<span class="comment">//由于math.random随机生成[0,1)的数，这样我们可以产生[begin,end)的数</span></span><br><span class="line">		<span class="keyword">int</span> index=begin+(<span class="keyword">int</span>)Math.random()*(end-begin);</span><br><span class="line">		<span class="comment">//此时我们交换begin和index位置的元素</span></span><br><span class="line">		<span class="keyword">int</span> temp=arr[begin];</span><br><span class="line">		arr[begin]=arr[index];</span><br><span class="line">		arr[index]=temp;</span><br><span class="line">		<span class="comment">//首先备份begin唯一的元素</span></span><br><span class="line">		<span class="keyword">int</span> pivot=arr[begin];</span><br><span class="line">		<span class="comment">//由于此时end为最后一个元素的下一个位置，我们需要将end往前挪动一位</span></span><br><span class="line">		end--;</span><br><span class="line">		<span class="keyword">while</span>(begin&lt;end) &#123;</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//从右往左</span></span><br><span class="line">			<span class="keyword">while</span>(begin&lt;end) &#123;</span><br><span class="line">				<span class="keyword">if</span>(arr[end]&gt;pivot) &#123;</span><br><span class="line">					end--;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> &#123;</span><br><span class="line">					arr[begin]=arr[end];</span><br><span class="line">					begin++;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;	</span><br><span class="line">			<span class="comment">//从左往右</span></span><br><span class="line">			<span class="keyword">while</span>(begin&lt;end) &#123;</span><br><span class="line">				<span class="keyword">if</span>(pivot&gt;arr[begin]) &#123;</span><br><span class="line">					begin++;</span><br><span class="line">				&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">					arr[end]=arr[begin];</span><br><span class="line">					end--;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;	</span><br><span class="line">			&#125;	</span><br><span class="line">		&#125;</span><br><span class="line">		arr[begin]=pivot;</span><br><span class="line">		<span class="comment">//此时begin=end ,返回轴点元素的位置</span></span><br><span class="line">		<span class="keyword">return</span> begin;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​     <strong>经过优化过后，会降低出现最坏情况的概率。至此，快速排序也就成功了！</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/30/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-归并排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
