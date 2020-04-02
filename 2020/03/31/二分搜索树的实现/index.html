@@ -16,7 +16,7 @@
 <meta property="og:description" content="二分搜索树的基本实现">
 <meta property="og:image" content="http://yoursite.com/Users/luojianhua/blog/themes/yilia/source/assets/tree.png">
 <meta property="article:published_time" content="2020-03-31T12:05:14.000Z">
-<meta property="article:modified_time" content="2020-03-31T12:26:59.267Z">
+<meta property="article:modified_time" content="2020-03-31T13:52:40.821Z">
 <meta property="article:author" content="Jianhua Luo">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
@@ -202,150 +202,150 @@
 <li>然后将58这个节点的左子树，挂接到后继节点上</li>
 <li>然后将58这个节点删除即可</li>
 </ul>
-<pre><code>public class BinarySearchTree&lt;E extends Comparable&lt;E&gt;&gt; {
+<pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BinarySearchTree</span>&lt;<span class="title">E</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">E</span>&gt;&gt; </span>{
 
 
-    private class Node{
-        public E e;
-        public Node left;
-        public Node right;
-        public Node(E e){
-            this.e=e;
-            left=null;
-            right=null;
+    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>{
+        <span class="keyword">public</span> E e;
+        <span class="keyword">public</span> Node left;
+        <span class="keyword">public</span> Node right;
+        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(E e)</span></span>{
+            <span class="keyword">this</span>.e=e;
+            left=<span class="keyword">null</span>;
+            right=<span class="keyword">null</span>;
         }
 
     }
 
 
 
-   private Node root;
-    /**
-     * the number of node
-     */
-    private int size;
+   <span class="keyword">private</span> Node root;
+    <span class="comment">/**</span>
+<span class="comment">     * the number of node</span>
+<span class="comment">     */</span>
+    <span class="keyword">private</span> <span class="keyword">int</span> size;
 
 
-    public BinarySearchTree(){
-        size=0;
-        root=null;
+    <span class="function"><span class="keyword">public</span> <span class="title">BinarySearchTree</span><span class="params">()</span></span>{
+        size=<span class="number">0</span>;
+        root=<span class="keyword">null</span>;
     }
-    /**
-     *
-     * @return size
-     */
-    public int getSize(){
-        return size;
-    }
-
-    /**
-     *
-     * @return isEmpty
-     */
-    public boolean isEmpty(){
-        return size==0;
-
+    <span class="comment">/**</span>
+<span class="comment">     *</span>
+<span class="comment">     * <span class="doctag">@return</span> size</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span></span>{
+        <span class="keyword">return</span> size;
     }
 
-    /**
-     * insert  element e to the tree
-     * @param e
-     */
-    public void add(E e){
+    <span class="comment">/**</span>
+<span class="comment">     *</span>
+<span class="comment">     * <span class="doctag">@return</span> isEmpty</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>{
+        <span class="keyword">return</span> size==<span class="number">0</span>;
+
+    }
+
+    <span class="comment">/**</span>
+<span class="comment">     * insert  element e to the tree</span>
+<span class="comment">     * <span class="doctag">@param</span> e</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(E e)</span></span>{
         add(root,e);
 
     }
 
-    /**
-     * recursion
-     * @param node
-     * @param e
-     * @return the root of the tree
-     */
-    private Node add(Node node,E e){
-        if(node==null) {
+    <span class="comment">/**</span>
+<span class="comment">     * recursion</span>
+<span class="comment">     * <span class="doctag">@param</span> node</span>
+<span class="comment">     * <span class="doctag">@param</span> e</span>
+<span class="comment">     * <span class="doctag">@return</span> the root of the tree</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">private</span> Node <span class="title">add</span><span class="params">(Node node,E e)</span></span>{
+        <span class="keyword">if</span>(node==<span class="keyword">null</span>) {
             size++;
-            return new Node(e);
+            <span class="keyword">return</span> <span class="keyword">new</span> Node(e);
 
         }
-        // the number is small than  the node.val
-        if(e.compareTo(node.e)&lt;0)
+        <span class="comment">// the number is small than  the node.val</span>
+        <span class="keyword">if</span>(e.compareTo(node.e)&lt;<span class="number">0</span>)
             node.left=add(node.left,e);
 
-        //the number is big than the node.val
-        if(e.compareTo(node.e)&gt;0)
+        <span class="comment">//the number is big than the node.val</span>
+        <span class="keyword">if</span>(e.compareTo(node.e)&gt;<span class="number">0</span>)
             node.right=add(node.right,e);
 
-        return node;
+        <span class="keyword">return</span> node;
 
     }
 
-    /**
-     *  is contains the element
-     * @param e
-     * @return
-     */
-    public boolean contains(E e){
+    <span class="comment">/**</span>
+<span class="comment">     *  is contains the element</span>
+<span class="comment">     * <span class="doctag">@param</span> e</span>
+<span class="comment">     * <span class="doctag">@return</span></span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(E e)</span></span>{
 
-        return contains(root,e);
+        <span class="keyword">return</span> contains(root,e);
 
     }
 
-    /**
-     * recursion
-     * @param node
-     * @param e
-     * @return
-     */
-    private boolean contains(Node node,E e){
-        if(node==null) return false;
-        if(e.compareTo(node.e)&lt;0)
-            return  contains(node.left,e);
+    <span class="comment">/**</span>
+<span class="comment">     * recursion</span>
+<span class="comment">     * <span class="doctag">@param</span> node</span>
+<span class="comment">     * <span class="doctag">@param</span> e</span>
+<span class="comment">     * <span class="doctag">@return</span></span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Node node,E e)</span></span>{
+        <span class="keyword">if</span>(node==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;
+        <span class="keyword">if</span>(e.compareTo(node.e)&lt;<span class="number">0</span>)
+            <span class="keyword">return</span>  contains(node.left,e);
 
-        else if(e.compareTo(node.e)&gt;0)
-            return  contains(node.right,e);
+        <span class="keyword">else</span> <span class="keyword">if</span>(e.compareTo(node.e)&gt;<span class="number">0</span>)
+            <span class="keyword">return</span>  contains(node.right,e);
 
-        else{
-            return true;
+        <span class="keyword">else</span>{
+            <span class="keyword">return</span> <span class="keyword">true</span>;
         }
 
 
     }
 
-    /**
-     * preorder traversal
-     */
-    public void preOrder(){
+    <span class="comment">/**</span>
+<span class="comment">     * preorder traversal</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrder</span><span class="params">()</span></span>{
 
         preOrder(root);
 
     }
 
-    /**
-     * recursion
-     * @param node
-     */
-    private void preOrder(Node node){
-        if(node==null)  return;
+    <span class="comment">/**</span>
+<span class="comment">     * recursion</span>
+<span class="comment">     * <span class="doctag">@param</span> node</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(Node node)</span></span>{
+        <span class="keyword">if</span>(node==<span class="keyword">null</span>)  <span class="keyword">return</span>;
         System.out.println(node.e);
         preOrder(node.left);
         preOrder(node.right);
 
     }
 
-    /**
-     * preorder traversal and no recursion
-     */
-    public void preOrderNR(){
-        if(root==null) return;
-        Stack&lt;Node&gt;stack=new Stack&lt;&gt;();
+    <span class="comment">/**</span>
+<span class="comment">     * preorder traversal and no recursion</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrderNR</span><span class="params">()</span></span>{
+        <span class="keyword">if</span>(root==<span class="keyword">null</span>) <span class="keyword">return</span>;
+        Stack&lt;Node&gt;stack=<span class="keyword">new</span> Stack&lt;&gt;();
         stack.push(root);
-        while(!stack.isEmpty()){
+        <span class="keyword">while</span>(!stack.isEmpty()){
             Node cur=stack.pop();
             System.out.println(cur.e);
-            if(cur.right!=null)
+            <span class="keyword">if</span>(cur.right!=<span class="keyword">null</span>)
                 stack.push(cur.right);
-            if(cur.left!=null)
+            <span class="keyword">if</span>(cur.left!=<span class="keyword">null</span>)
                 stack.push(cur.left);
 
 
@@ -354,40 +354,40 @@
     }
 
 
-    /**
-     * inorder traversal
-     */
-    public void inOrder(){
+    <span class="comment">/**</span>
+<span class="comment">     * inorder traversal</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inOrder</span><span class="params">()</span></span>{
 
         inOrder(root);
 
     }
 
-    /**
-     * recursion
-     * @param node
-     */
-    private void inOrder(Node node) {
-        if(node==null) return;
+    <span class="comment">/**</span>
+<span class="comment">     * recursion</span>
+<span class="comment">     * <span class="doctag">@param</span> node</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(Node node)</span> </span>{
+        <span class="keyword">if</span>(node==<span class="keyword">null</span>) <span class="keyword">return</span>;
         inOrder(node.left);
         System.out.println(node.e);
         inOrder(node.right);
     }
 
-    /**
-     * postOrder traversal
-     */
-    public void postOrder(){
+    <span class="comment">/**</span>
+<span class="comment">     * postOrder traversal</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postOrder</span><span class="params">()</span></span>{
         postOrder(root);
 
     }
 
-    /**
-     * recursion
-     * @param node
-     */
-    private void postOrder(Node node){
-        if(node==null) return;
+    <span class="comment">/**</span>
+<span class="comment">     * recursion</span>
+<span class="comment">     * <span class="doctag">@param</span> node</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(Node node)</span></span>{
+        <span class="keyword">if</span>(node==<span class="keyword">null</span>) <span class="keyword">return</span>;
         postOrder(node.left);
         postOrder(node.right);
         System.out.println(node.e);
@@ -395,131 +395,131 @@
 
     }
 
-    /**
-     * sequenceorder tavaersal
-     *  use FIFO(first in first out)
-     */
-    public void levelOrder(){
-        if(root==null) return;
-        Queue&lt;Node&gt;queue=new LinkedList&lt;&gt;();
+    <span class="comment">/**</span>
+<span class="comment">     * sequenceorder tavaersal</span>
+<span class="comment">     *  use FIFO(first in first out)</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">levelOrder</span><span class="params">()</span></span>{
+        <span class="keyword">if</span>(root==<span class="keyword">null</span>) <span class="keyword">return</span>;
+        Queue&lt;Node&gt;queue=<span class="keyword">new</span> LinkedList&lt;&gt;();
         queue.add(root);
-        while(!queue.isEmpty()){
+        <span class="keyword">while</span>(!queue.isEmpty()){
             Node cur=queue.remove();
             System.out.println(cur.e);
-            if(cur.left!=null) queue.add(cur.left);
-            if(cur.right!=null) queue.add(cur.right);
+            <span class="keyword">if</span>(cur.left!=<span class="keyword">null</span>) queue.add(cur.left);
+            <span class="keyword">if</span>(cur.right!=<span class="keyword">null</span>) queue.add(cur.right);
         }
 
     }
 
-    /**
-     * search the minimum of the tree
-     * @return
-     */
-    public E minimum(){
-        if(size==0)
-            throw new IllegalArgumentException(&quot;BinarySearch Tree is empty&quot;);
+    <span class="comment">/**</span>
+<span class="comment">     * search the minimum of the tree</span>
+<span class="comment">     * <span class="doctag">@return</span></span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> E <span class="title">minimum</span><span class="params">()</span></span>{
+        <span class="keyword">if</span>(size==<span class="number">0</span>)
+            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"BinarySearch Tree is empty"</span>);
 
         Node node=minimum(root);
-        return node.e;
+        <span class="keyword">return</span> node.e;
     }
 
-    /**
-     * recursion search
-     * @param node
-     * @return node
-     */
-    private Node minimum(Node node){
-        if(node.left==null)
-            return node;
-        return minimum(node.left);
+    <span class="comment">/**</span>
+<span class="comment">     * recursion search</span>
+<span class="comment">     * <span class="doctag">@param</span> node</span>
+<span class="comment">     * <span class="doctag">@return</span> node</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">private</span> Node <span class="title">minimum</span><span class="params">(Node node)</span></span>{
+        <span class="keyword">if</span>(node.left==<span class="keyword">null</span>)
+            <span class="keyword">return</span> node;
+        <span class="keyword">return</span> minimum(node.left);
     }
 
-    /**
-     * search the maximum of the tree
-     * @return
-     */
-    public E maximum(){
-        if(size==0)
-            throw new IllegalArgumentException(&quot;BinarySearch Tree is empty&quot;);
+    <span class="comment">/**</span>
+<span class="comment">     * search the maximum of the tree</span>
+<span class="comment">     * <span class="doctag">@return</span></span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> E <span class="title">maximum</span><span class="params">()</span></span>{
+        <span class="keyword">if</span>(size==<span class="number">0</span>)
+            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"BinarySearch Tree is empty"</span>);
         Node node = maximum(root);
-        return node.e;
+        <span class="keyword">return</span> node.e;
 
     }
 
-    /**
-     * recursion search
-     * @param node
-     * @return node
-     */
-    private Node maximum(Node node){
-        if(node.right==null)
-            return node;
-       return maximum(node.right);
+    <span class="comment">/**</span>
+<span class="comment">     * recursion search</span>
+<span class="comment">     * <span class="doctag">@param</span> node</span>
+<span class="comment">     * <span class="doctag">@return</span> node</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">private</span> Node <span class="title">maximum</span><span class="params">(Node node)</span></span>{
+        <span class="keyword">if</span>(node.right==<span class="keyword">null</span>)
+            <span class="keyword">return</span> node;
+       <span class="keyword">return</span> maximum(node.right);
     }
 
-    /**
-     * delete the node of the minimum element
-     * @return the element
-     */
-    public E removeMin(){
+    <span class="comment">/**</span>
+<span class="comment">     * delete the node of the minimum element</span>
+<span class="comment">     * <span class="doctag">@return</span> the element</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> E <span class="title">removeMin</span><span class="params">()</span></span>{
         E minimum = minimum();
         root=removeMin(root);
-        return minimum;
+        <span class="keyword">return</span> minimum;
     }
 
-    /**
-     * recursion process
-     * @param node
-     * @return node
-     */
-    private Node removeMin(Node node){
-        //the border of recursion
-        if(node.left==null){
+    <span class="comment">/**</span>
+<span class="comment">     * recursion process</span>
+<span class="comment">     * <span class="doctag">@param</span> node</span>
+<span class="comment">     * <span class="doctag">@return</span> node</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">private</span> Node <span class="title">removeMin</span><span class="params">(Node node)</span></span>{
+        <span class="comment">//the border of recursion</span>
+        <span class="keyword">if</span>(node.left==<span class="keyword">null</span>){
             Node rightNode=node.right;
-            // make the node out of the tree
-            node.right=null;
+            <span class="comment">// make the node out of the tree</span>
+            node.right=<span class="keyword">null</span>;
             size--;
-            return rightNode;
+            <span class="keyword">return</span> rightNode;
         }
         node.left=removeMin(node.left);
-        return node;
+        <span class="keyword">return</span> node;
     }
 
-    /**
-     * delete the node of the maximum element
-     * @return the element
-     */
-    public E removeMax(){
+    <span class="comment">/**</span>
+<span class="comment">     * delete the node of the maximum element</span>
+<span class="comment">     * <span class="doctag">@return</span> the element</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> E <span class="title">removeMax</span><span class="params">()</span></span>{
         E maximum=maximum();
         root=removeMax(root);
-        return maximum;
+        <span class="keyword">return</span> maximum;
     }
 
-    /**
-     * recursion process
-     * @param node
-     * @return node
-     */
-    private Node removeMax(Node node){
-        //the border of recursion
-        if(node.right==null){
+    <span class="comment">/**</span>
+<span class="comment">     * recursion process</span>
+<span class="comment">     * <span class="doctag">@param</span> node</span>
+<span class="comment">     * <span class="doctag">@return</span> node</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">private</span> Node <span class="title">removeMax</span><span class="params">(Node node)</span></span>{
+        <span class="comment">//the border of recursion</span>
+        <span class="keyword">if</span>(node.right==<span class="keyword">null</span>){
             Node leftNode=node.left;
-            // make the node out of the tree
-            node.left=null;
+            <span class="comment">// make the node out of the tree</span>
+            node.left=<span class="keyword">null</span>;
             size--;
-            return leftNode;
+            <span class="keyword">return</span> leftNode;
         }
         node.right=removeMax(node.right);
-        return node;
+        <span class="keyword">return</span> node;
 
     }
 
-    /**
-     * delete the node of element
-     * @param e
-     */
-    public void remove(E e){
+    <span class="comment">/**</span>
+<span class="comment">     * delete the node of element</span>
+<span class="comment">     * <span class="doctag">@param</span> e</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(E e)</span></span>{
 
        root= remove(e,root);
 
@@ -527,41 +527,41 @@
 
     }
 
-    /**
-     * recursion process
-     * @param e
-     * @param node
-     * @return node
-     */
-    private Node remove(E e, Node node) {
-        if(node==null)
-            return null;
-         if(e.compareTo(node.e)&lt;0){
+    <span class="comment">/**</span>
+<span class="comment">     * recursion process</span>
+<span class="comment">     * <span class="doctag">@param</span> e</span>
+<span class="comment">     * <span class="doctag">@param</span> node</span>
+<span class="comment">     * <span class="doctag">@return</span> node</span>
+<span class="comment">     */</span>
+    <span class="function"><span class="keyword">private</span> Node <span class="title">remove</span><span class="params">(E e, Node node)</span> </span>{
+        <span class="keyword">if</span>(node==<span class="keyword">null</span>)
+            <span class="keyword">return</span> <span class="keyword">null</span>;
+         <span class="keyword">if</span>(e.compareTo(node.e)&lt;<span class="number">0</span>){
              node.left=remove(e,node.left);
-             return node;
-         }else if(e.compareTo(node.e)&gt;0){
+             <span class="keyword">return</span> node;
+         }<span class="keyword">else</span> <span class="keyword">if</span>(e.compareTo(node.e)&gt;<span class="number">0</span>){
              node.right=remove(e,node.right);
-             return node;
-         }else{
-             // e==node.e
-             if(node.left==null){
+             <span class="keyword">return</span> node;
+         }<span class="keyword">else</span>{
+             <span class="comment">// e==node.e</span>
+             <span class="keyword">if</span>(node.left==<span class="keyword">null</span>){
                  Node rightNode=node.right;
-                 node.right=null;
+                 node.right=<span class="keyword">null</span>;
                  size--;
-                 return rightNode;
+                 <span class="keyword">return</span> rightNode;
              }
-             if(node.right==null){
+             <span class="keyword">if</span>(node.right==<span class="keyword">null</span>){
                  Node leftNode=node.left;
-                 node.left=null;
+                 node.left=<span class="keyword">null</span>;
                  size--;
-                 return leftNode;
+                 <span class="keyword">return</span> leftNode;
              }
 
              Node successor=minimum(node.right);
              successor.right=removeMin(node.right);
              successor.left=node.left;
-             node.left=node.right=null;
-             return successor;
+             node.left=node.right=<span class="keyword">null</span>;
+             <span class="keyword">return</span> successor;
          }
 
     }
@@ -569,6 +569,7 @@
 }
 
 </code></pre>
+
       
 
       
@@ -676,6 +677,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/04/01/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98%E4%B8%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          八皇后问题一
+        
+      </div>
+    </a>
   
   
     <a href="/2020/03/30/%E6%A0%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
@@ -801,11 +811,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
