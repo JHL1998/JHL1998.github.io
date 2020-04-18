@@ -6,15 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/4 | Jianhua Luo的博客</title>
+  <title>Trie | Jianhua Luo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jianhua Luo的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2020/04/index.html">
+  <meta name="description" content="字典树(Trie)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Trie">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/Trie/index.html">
 <meta property="og:site_name" content="Jianhua Luo的博客">
-<meta property="og:description" content="技术博客">
+<meta property="og:description" content="字典树(Trie)">
+<meta property="article:published_time" content="2020-04-18T14:14:24.000Z">
+<meta property="article:modified_time" content="2020-04-18T14:15:19.890Z">
 <meta property="article:author" content="Jianhua Luo">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Jianhua Luo的博客" type="application/atom+xml">
@@ -145,36 +148,94 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Trie" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Trie
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/18/Trie/" class="archive-article-date">
+
+        
+        <a href="/2020/04/18/Trie/" class="archive-article-date">
   	<time datetime="2020-04-18T14:14:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/18/Trie/">Trie</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="字典树-Trie"><a href="#字典树-Trie" class="headerlink" title="字典树(Trie)"></a>字典树(Trie)</h2><a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+<h3 id="Trie一般是用来处理字符串。"><a href="#Trie一般是用来处理字符串。" class="headerlink" title="Trie一般是用来处理字符串。"></a>Trie一般是用来处理字符串。</h3><p>如果有n个条目，使用树结构的话，我们试想最好的情况下，即不会退化成链表时，查询的时间复杂度为O(logn)。</p>
+<p>这个时间复杂度已经很低了，但是当有100万个条目时(2^20)，此时logn大约为20.</p>
+<p>而Trie这种数据结构查询每个条目的时间复杂度和字典中一共有多少条目无关！</p>
+<p>只与我们查询的字符串的长度相关，时间复杂度为O(w),w为查询单词的长度！这是非常高效的，因为在大多数情况下单词的长度都是小于10的。</p>
+<p>如果考虑常规情况，即我们查询26个英文字母的话，每个节点有26个指向下个节点的指针（在不考虑大小写的情况下）并且我们只适用于单词场景，如果用来记录那种邮件名的话，我们还应该加入如”@.”这样的符号.</p>
+<p>这时，我们将上述定义改一下 :  <strong>每个节点有若干指向下个节点的指针</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">  	<span class="keyword">char</span> c;</span><br><span class="line">  Map&lt;<span class="keyword">char</span>,Node&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这时候我们思考这样一个问题，当我们需要查一个单词时，我们首先知道首字母才会往下查，我们应该把字母标在边上，而不是节点上，我们在来到这个节点之前就知道这个字母是什么了.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">  Map&lt;<span class="keyword">char</span>,Node&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>即此时我们不必存储char的值.</p>
+<p>在英语单词中，很多单词是某个单词的前缀，比如pan-&gt;panda.如果我们以每个单词的结尾作为叶子节点的话，这时候就有矛盾了，明明pan已经结尾了，我们如果还需要查询panda的话，无法查询，这时候我们在Node节点中引入一个标记，标记它是否是某个单词的结尾，某个单词的结尾只靠叶子节点是无法区别的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">  <span class="keyword">boolean</span> isWord;</span><br><span class="line">  Map&lt;<span class="keyword">char</span>,Node&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Trie又叫做前缀树，我们在搜索一个单词中，所经过的一路都是目标单词的前缀。</p>
+<p>下面就来实现一个Trie吧！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Trie</span></span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> isWord;</span><br><span class="line">    <span class="keyword">public</span> TreeMap&lt;Character,Node&gt;next;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">boolean</span> isWord)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.isWord=isWord;</span><br><span class="line">    next=<span class="keyword">new</span> TreeMap&lt;&gt;();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(<span class="keyword">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//根节点</span></span><br><span class="line">  <span class="keyword">private</span> Node root;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">int</span> size;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span></span>&#123;</span><br><span class="line">        root=<span class="keyword">new</span> Node();</span><br><span class="line">        size=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获得Trie中存储的单词数量</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 向Trie中添加一个新的单词word</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> word</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(String word)</span></span>&#123;</span><br><span class="line">        Node cur=root;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;word.length() ; i++) &#123;</span><br><span class="line">            <span class="keyword">char</span> c=word.charAt(i);</span><br><span class="line">            <span class="comment">//将c作为一个节点插入到Trie中</span></span><br><span class="line">            <span class="keyword">if</span>(cur.next.get(c)==<span class="keyword">null</span>)&#123;</span><br><span class="line">                cur.next.put(c,<span class="keyword">new</span> Node());</span><br><span class="line">            &#125;</span><br><span class="line">            cur=cur.next.get(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//这个节点以前不表示一个单词的结尾</span></span><br><span class="line">        <span class="keyword">if</span>(!cur.isWord)&#123;</span><br><span class="line">            cur.isWord=<span class="keyword">true</span>;</span><br><span class="line">          <span class="comment">//维护size</span></span><br><span class="line">            size++;</span><br><span class="line">        &#125;</span><br><span class="line">       <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询单词word是否在Trie中</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> word</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(String word)</span></span>&#123;</span><br><span class="line">        Node cur=root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;word.length();i++)&#123;</span><br><span class="line">          <span class="keyword">char</span> c=word.chatAt(i);</span><br><span class="line">          <span class="keyword">if</span>(cur.next.get(c)==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          cur=cur.next.get(c);</span><br><span class="line">       &#125;</span><br><span class="line">        <span class="keyword">return</span> cur.isWord;</span><br><span class="line">      &#125;</span><br><span class="line">       <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询是否有单词以prefix为前缀</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> prefix</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPrefix</span><span class="params">(String prefix)</span></span>&#123;</span><br><span class="line">       Node cur=root;</span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;prefix.length();i++)&#123;</span><br><span class="line">           <span class="keyword">char</span> c=prefix.charAt(i);</span><br><span class="line">           <span class="keyword">if</span>(cur.next.get(c)==<span class="keyword">null</span>)&#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           cur=cur.next.get(c);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>通过上述代码，我们简单的实现一棵前缀树，具备增加元素，查询元素以及判断是否有前缀的功能。</p>
+<h3 id="关于前缀树"><a href="#关于前缀树" class="headerlink" title="关于前缀树"></a>关于前缀树</h3><h4 id="LeetCode-208、实现Trie-https-leetcode-cn-com-problems-implement-trie-prefix-tree"><a href="#LeetCode-208、实现Trie-https-leetcode-cn-com-problems-implement-trie-prefix-tree" class="headerlink" title="LeetCode 208、实现Trie https://leetcode-cn.com/problems/implement-trie-prefix-tree/"></a>LeetCode 208、实现Trie <a href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/implement-trie-prefix-tree/</a></h4><p>题目要求实现一棵前缀树，我们可以直接将上述的前缀树进行拷贝，就可以AC了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Trie</span> </span>&#123;</span><br><span class="line">       <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">           <span class="keyword">public</span> <span class="keyword">boolean</span> isWord;</span><br><span class="line">           <span class="keyword">public</span> Map&lt;Character,Node&gt; next;</span><br><span class="line"></span><br><span class="line">           <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">boolean</span> isWord)</span></span>&#123;</span><br><span class="line">             <span class="keyword">this</span>.isWord=isWord;</span><br><span class="line">             next=<span class="keyword">new</span> TreeMap&lt;&gt;();</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">()</span></span>&#123;</span><br><span class="line">               <span class="keyword">this</span>(<span class="keyword">false</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">private</span> Node root;</span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        root=<span class="keyword">new</span> Node();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Inserts a word into the trie. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            Node cur=root;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;word.length();i++)&#123;</span><br><span class="line">                <span class="keyword">char</span> c=word.charAt(i);</span><br><span class="line">                <span class="keyword">if</span>(cur.next.get(c)==<span class="keyword">null</span>)&#123;</span><br><span class="line">                    cur.next.put(c,<span class="keyword">new</span> Node());</span><br><span class="line">                &#125;</span><br><span class="line">                cur=cur.next.get(c);</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!cur.isWord)&#123;</span><br><span class="line">                cur.isWord=<span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns if the word is in the trie. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">search</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">        Node cur=root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;word.length();i++)&#123;</span><br><span class="line">            <span class="keyword">char</span> c=word.charAt(i);</span><br><span class="line">            <span class="keyword">if</span>(cur.next.get(c)==<span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            cur=cur.next.get(c);</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cur.isWord;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns if there is any word in the trie that starts with the given prefix. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">startsWith</span><span class="params">(String prefix)</span> </span>&#123;</span><br><span class="line">           Node cur=root;</span><br><span class="line">           <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;prefix.length();i++)&#123;</span><br><span class="line">               <span class="keyword">char</span> c=prefix.charAt(i);</span><br><span class="line">               <span class="keyword">if</span>(cur.next.get(c)==<span class="keyword">null</span>)&#123;</span><br><span class="line">                   <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">               &#125;</span><br><span class="line">               cur=cur.next.get(c);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝奶茶<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -186,364 +247,105 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/18/Trie/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/17/%E9%93%BE%E8%A1%A8%E8%A7%A3%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-04-17T05:27:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/17/%E9%93%BE%E8%A1%A8%E8%A7%A3%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">链表解题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/17/%E9%93%BE%E8%A1%A8%E8%A7%A3%E9%A2%98/">链表解题</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/17/AVL/" class="archive-article-date">
-  	<time datetime="2020-04-17T05:26:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/17/AVL/">AVL</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/13/%E9%93%BE%E8%A1%A8%E4%B8%8E%E9%80%92%E5%BD%92%E4%B8%80/" class="archive-article-date">
-  	<time datetime="2020-04-13T08:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/13/%E9%93%BE%E8%A1%A8%E4%B8%8E%E9%80%92%E5%BD%92%E4%B8%80/">链表与递归一、</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/09/DP2/" class="archive-article-date">
-  	<time datetime="2020-04-09T12:20:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/09/DP2/">DP2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/09/DP1/" class="archive-article-date">
-  	<time datetime="2020-04-09T11:44:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/09/DP1/">DP1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/09/%E5%88%9D%E5%A7%8BDP/" class="archive-article-date">
-  	<time datetime="2020-04-09T11:42:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/09/%E5%88%9D%E5%A7%8BDP/">初始DP</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/06/%E8%B4%AA%E5%BF%83%E7%AD%96%E7%95%A5/" class="archive-article-date">
-  	<time datetime="2020-04-06T13:05:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/06/%E8%B4%AA%E5%BF%83%E7%AD%96%E7%95%A5/">贪心策略</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/06/%E5%A0%86%E4%B8%8E%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E2%80%9D/" class="archive-article-date">
-  	<time datetime="2020-04-06T07:31:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/06/%E5%A0%86%E4%B8%8E%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E2%80%9D/">“堆与优先队列”</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/05/%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/" class="archive-article-date">
-  	<time datetime="2020-04-05T13:07:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/05/%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/">分治策略</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2020/04/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/04/page/2/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -567,8 +369,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
