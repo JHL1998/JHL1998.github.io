@@ -6,16 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 栈 | Jianhua Luo的博客</title>
+  <title>DP3、 | Jianhua Luo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jianhua Luo的博客">
-<meta property="og:url" content="http://yoursite.com/tags/%E6%A0%88/index.html">
+  <meta name="description" content="背包问题，从01背包-&gt;完全背包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DP3、">
+<meta property="og:url" content="http://yoursite.com/2020/04/27/DP3%E3%80%81/index.html">
 <meta property="og:site_name" content="Jianhua Luo的博客">
-<meta property="og:description" content="技术博客">
+<meta property="og:description" content="背包问题，从01背包-&gt;完全背包">
+<meta property="og:image" content="http://yoursite.com/Users/luojianhua/Desktop/01%E8%83%8C%E5%8C%85-1.png">
+<meta property="article:published_time" content="2020-04-26T23:45:14.000Z">
+<meta property="article:modified_time" content="2020-04-26T23:46:56.199Z">
 <meta property="article:author" content="Jianhua Luo">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/Users/luojianhua/Desktop/01%E8%83%8C%E5%8C%85-1.png">
   
     <link rel="alternative" href="/atom.xml" title="Jianhua Luo的博客" type="application/atom+xml">
   
@@ -145,60 +150,251 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-DP3、" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/30/%E6%A0%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2020-03-30T13:59:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-30</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/30/%E6%A0%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">栈的基本使用</a>
+    <h1 class="article-title" itemprop="name">
+      DP3、
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/04/27/DP3%E3%80%81/" class="archive-article-date">
+  	<time datetime="2020-04-26T23:45:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背包问题，从01背包-gt-完全背包"><a href="#背包问题，从01背包-gt-完全背包" class="headerlink" title="背包问题，从01背包-&gt;完全背包"></a>背包问题，从01背包-&gt;完全背包</h2><a id="more"></a>
+
+<h3 id="01背包问题"><a href="#01背包问题" class="headerlink" title="01背包问题"></a>01背包问题</h3><p><strong>该问题节选自 <a href="https://www.acwing.com/problem/content/2/" target="_blank" rel="noopener">https://www.acwing.com/problem/content/2/</a></strong></p>
+<p><img src="/Users/luojianhua/Desktop/01%E8%83%8C%E5%8C%85-1.png" alt="01背包-1"></p>
+<ul>
+<li>题目很好理解，就是我们要选择一个最优方案，使得总价值最大，并且总体积不能超过背包容量.</li>
+<li>01背包问题的本质就是背包只有选或者不选两种可能.</li>
+<li>想象一下，如果我们使用暴力法，即枚举所有的可能， 一共是2^N的指数级别的时间复杂度，然后选择一个最优的方案.</li>
+<li>背包问题还有一个著名的标签，那就是动态规划了，接下来我们用动态规划的方式去思考！</li>
+</ul>
+<h4 id="01背包问题未优化版"><a href="#01背包问题未优化版" class="headerlink" title="01背包问题未优化版"></a>01背包问题未优化版</h4><ul>
+<li>首先我们需要定义dp的状态，题目要求N件物品，容量为V的背包的最大价值.</li>
+<li>我们定义dp(i,j)为i件物品，容量为j的背包的总价值。那么很明显，我们最后所求得就是 dp(N,V).</li>
+<li>现在关键的问题是我们如何分解子问题，然后得到一个转移方程.</li>
+<li>首先我们考虑边界dp(0,0)表示取0个物品的总价值，那么很明显 dp(0,0)=0.</li>
+<li>接下来该如何考虑分解子问题呢？我们现在开始分析<ul>
+<li>我们将总背包分为前i-1个背包和最后一个背包.</li>
+<li>并且最后一个背包有两种情况，选or不选.</li>
+<li>如果我们不选最后一个背包，那么很简单，此时dp(i,j)=dp(i-1,j).</li>
+<li>如果我们选了最后一个背包.此时最后一个背包的价值w[i]是一个固定值.我们为了使总价值最大，我们只需要让前i-1个物体的总价值达到最大.此时一共有前i-1个物体，并且对应的体积为j-v[i].那么很容易的，我们可以推出这个转移方程.</li>
+<li>此时dp(i,j)=max{dp(i-1,j),dp(i-1,j-v[i])+w[i]}.</li>
+</ul>
+</li>
+</ul>
+<p>有了上面的分析，我们先把这块部分用代码实现一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">      </span><br><span class="line">        Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">int</span> N = input.nextInt();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> V = input.nextInt();</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">int</span>[] v = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>] ;</span><br><span class="line">      </span><br><span class="line">        <span class="keyword">int</span>[] w = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>] ;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span> ; i &lt;= N ; i++)&#123;</span><br><span class="line">          </span><br><span class="line">            v[i] = input.nextInt();</span><br><span class="line">            w[i] = input.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[N+<span class="number">1</span>][V+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= V; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(j &gt;= v[i])&#123;</span><br><span class="line">                    dp[i][j] = Math.max(dp[i][j], dp[i-<span class="number">1</span>][j-v[i]] + w[i]);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(dp[N][V]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们利用一个二维数组对此问题进行了分析，并且实现，但是实际上，我们只需要用1维数组就可以实现该过程.</p>
+<h4 id="01背包问题优化"><a href="#01背包问题优化" class="headerlink" title="01背包问题优化"></a>01背包问题优化</h4><p><strong>首先明确一点，dp问题所有的优化，我们只是在原代码的基础上进行等价变形，并且我们只能够优化空间复杂度.</strong></p>
+<p>我们尝试将上述问题转换为1维数组.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">      </span><br><span class="line">        Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">int</span> N = input.nextInt();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> V = input.nextInt();</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">int</span>[] v = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>] ;</span><br><span class="line">      </span><br><span class="line">        <span class="keyword">int</span>[] w = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>] ;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span> ; i &lt;= N ; i++)&#123;</span><br><span class="line">          </span><br><span class="line">            v[i] = input.nextInt();</span><br><span class="line">            w[i] = input.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">      <span class="comment">//我们在原代码的基础上，只保留了dp(j)，所有关于背包个数，我们全部删除</span></span><br><span class="line">        <span class="keyword">int</span>[]dp = <span class="keyword">new</span> <span class="keyword">int</span>[V+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= V; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(j &gt;= v[i])&#123;</span><br><span class="line">                  <span class="comment">//dp[i][j]=Math.max(dp[i-1][j],dp[i-1][j-v[i]]+w[i])</span></span><br><span class="line">                    dp[j] = Math.max(dp[j], dp[j-v[i]] + w[i]);</span><br><span class="line">                  <span class="comment">//dp[i][j]=max(dp[i][j],dp[i][j-v[i]]+w[i])</span></span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                  <span class="comment">//dp[i][j]=dp[i-1][j]</span></span><br><span class="line">                    dp[j] = dp[j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(dp[N][V]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们将之前的代码通过注释添加在了修改后的代码边上，方便我们做比较，此时我们首先可以看到下面这个等式.</p>
+<ul>
+<li><p>即此时dp(i,j)=dp(i-1,j) 与dp(j)=dp(j)是否等价？</p>
+</li>
+<li><p>首先我们可以知道，我们应该是先算出dp(i-1,j)，然后将dp(i,j)进行更新.即此时两者是等价的.</p>
+</li>
+<li><p>我们再来考虑第一个等式.该等式的实质就是比较dp[j], dp[j-v[i]] + w[i],两者的大小，然后更新dp[j].</p>
+</li>
+<li><p>此时到底是为dp(i,j-v[i])还是为dp(i-1,j-v[i])，取决于我们这个它是在第i-1层还是第i层计算的， 明显我们是从小到大遍历j，且此时j-v[i]&lt;j，即我们在算f(j)时，应该先算出f(j-v[i])，即此时我们是第i层的f(j-v[i]),即dp(i,j-v[i]),即此时和我们原来的方程不等价, 原方程为dp(i-1,j-v[i]),即此时我们需要改变j的遍历顺序.</p>
+</li>
+</ul>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">      </span><br><span class="line">        Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">int</span> N = reader.nextInt();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> V = reader.nextInt();</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">int</span>[] v = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>] ;</span><br><span class="line">      </span><br><span class="line">        <span class="keyword">int</span>[] w = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>] ;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span> ; i &lt;= N ; i++)&#123;</span><br><span class="line">          </span><br><span class="line">            v[i] = reader.nextInt();</span><br><span class="line">            w[i] = reader.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        reader.close() ;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[V+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>]= <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++)&#123;</span><br><span class="line">          <span class="comment">//即我们只是改变了这里的遍历顺序，便可以优化空间复杂度</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = V; j &gt;=v[i] ;j--)&#123;</span><br><span class="line">                <span class="keyword">if</span>(j &gt;= v[i])&#123;</span><br><span class="line">                    dp[j] = Math.max(dp[j], dp[j-v[i]] + w[i]);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[j] = dp[j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(dp[V]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>至此，我们就实现了01背包的解决方案！接下来我们来看完全背包</p>
+<h4 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h4><p>此时我们先抛出结论，然后在讲背后的细节.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">      </span><br><span class="line">        Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">int</span> N = input.nextInt();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> V = input.nextInt();</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">int</span>[] v = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>] ;</span><br><span class="line">      </span><br><span class="line">        <span class="keyword">int</span>[] w = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>] ;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span> ; i &lt;= N ; i++)&#123;</span><br><span class="line">          </span><br><span class="line">            v[i] = input.nextInt();</span><br><span class="line">            w[i] = input.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[V+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>]= <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++)&#123;</span><br><span class="line">          <span class="comment">//与01背包不同的是，我们只改变了这一行代码，即改变j的遍历顺序</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = v[i]; j &lt;=V ;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(j &gt;= v[i])&#123;</span><br><span class="line">                    dp[j] = Math.max(dp[j], dp[j-v[i]] + w[i]);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[j] = dp[j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(dp[V]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>事实上，我们只改变了一行代码，但是01背包与多重背包却有着很大的不同！</p>
+<p><strong>01背包与完全背包的区别在于，一个背包可以重复选</strong></p>
+<ul>
+<li>此时我们还是和分析01背包一样，考虑两个子问题， 即最后一个背包选或者不选，不选的情况和上述01背包一样.</li>
+<li>区别在于，如果我们选择最后一个背包，我们可以选1个，2个…k个….. 一只到满足背包的容量.</li>
+<li>即dp(i,j)=max{dp(i-1,j),<strong>dp(i-1,j-v)+w,dp(i-1,j-2v)+2w…..dp(i-1,j-kv)+kw</strong>} 此时max里面有n个值，如果对n个值进行比较，我们需要再添加一层for循环，即O(n^3)的时间复杂度，显然是不可取的.</li>
+<li>此时我们做一个变量替换，dp(i,j-v)=max{<strong>dp(i-1,j-v),dp(i-1,j-2v)+w,dp(i-1,j-3v)+w……..</strong>} </li>
+<li>相信你已经看到了，上下两个式子非常相似，只相差一个W，即我们需要求dp(i,j)的最大值，只需要求dp(i,j-v)的最大值+w</li>
+<li>即dp(i,j)=max{dp(i-1,j),dp(i,j-v)+w}</li>
+</ul>
+<p>通过上述的转移方程，我们可以很容易的写出代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * dp[i][j]=Math.max(dp[i-1][j],dp[i][j-v[i]]+w[i])</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">      </span><br><span class="line">        Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">int</span> N = reader.nextInt();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> V = reader.nextInt();</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">int</span>[] v = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>] ;</span><br><span class="line">      </span><br><span class="line">        <span class="keyword">int</span>[] w = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>] ;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span> ; i &lt;= N ; i++)&#123;</span><br><span class="line">          </span><br><span class="line">            v[i] = reader.nextInt();</span><br><span class="line">            w[i] = reader.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        reader.close() ;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">int</span> dp[][]=<span class="keyword">new</span> <span class="keyword">int</span>[N+<span class="number">1</span>][V+<span class="number">1</span>];</span><br><span class="line">       dp[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">           <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=V;j++)&#123;</span><br><span class="line">               <span class="keyword">if</span>(j-v[i]&gt;=<span class="number">0</span>) dp[i][j]=Math.max(dp[i-<span class="number">1</span>][j],dp[i][j-v[i]]+w[i]);</span><br><span class="line">               <span class="keyword">else</span> dp[i][j]=dp[i-<span class="number">1</span>][j];</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       System.out.println(dp[N][V]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果要对这个二维数组进行优化，与上述思路一样，并且此时 j-v&lt;j，即此时dp(j-v[i])就是在第i层算出来的，即等价于dp(i,j-v[i])，那么我们此时可以直接进行优化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">           <span class="keyword">for</span>(<span class="keyword">int</span> j=v[i];j&lt;=V;j++)&#123;</span><br><span class="line">               <span class="keyword">if</span>(j-v[i]&gt;=<span class="number">0</span>) dp[j]=Math.max(dp[j],dp[j-v[i]]+w[i]);</span><br><span class="line">               <span class="keyword">else</span> dp[j]=dp[j];</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">System.out.println(dp[V]);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>至此，01背包与完全背包也就全部写完了！</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝奶茶<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">栈</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/27/DP3%E3%80%81/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/04/19/%E5%B9%B6%E6%9F%A5%E9%9B%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">并查集</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -221,9 +417,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -296,10 +492,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
