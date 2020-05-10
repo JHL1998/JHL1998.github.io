@@ -6,18 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>插入排序 | Jianhua Luo的博客</title>
+  <title>Archives: 2020/5 | Jianhua Luo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="插入排序">
-<meta property="og:type" content="article">
-<meta property="og:title" content="插入排序">
-<meta property="og:url" content="http://yoursite.com/2020/03/29/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/index.html">
+  <meta name="description" content="技术博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jianhua Luo的博客">
+<meta property="og:url" content="http://yoursite.com/archives/2020/05/index.html">
 <meta property="og:site_name" content="Jianhua Luo的博客">
-<meta property="og:description" content="插入排序">
-<meta property="article:published_time" content="2020-03-28T16:01:49.000Z">
-<meta property="article:modified_time" content="2020-03-29T10:54:22.018Z">
+<meta property="og:description" content="技术博客">
 <meta property="article:author" content="Jianhua Luo">
-<meta property="article:tag" content="排序算法">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Jianhua Luo的博客" type="application/atom+xml">
@@ -148,205 +145,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-插入排序" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      插入排序
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/05/10/%E4%B8%8E%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%9C%89%E5%85%B3%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-05-10T11:15:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-10</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/05/10/%E4%B8%8E%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%9C%89%E5%85%B3%E7%9A%84%E9%97%AE%E9%A2%98/">与并查集有关的问题</a>
     </h1>
   
 
-        
-        <a href="/2020/03/29/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-03-28T16:01:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><a id="more"></a>
-
-<ul>
-<li>插入排序，实质上是向一组已经有序的数组里面插入元素。举个栗子，就像打扑克牌起牌一样，你手上已经有一堆牌，并且你已经排好序，这时候你又起一张牌，并且要将他插入“合适的位置”。如果待插入的元素比最后一个元素大，那么直接插入即可，如果比最后一个元素小，那么他将向左移，继续比较。直到他比那个元素大，那么将其插入。当然，我们要备份插入的那个元素，以免比它大的元素在后移过程中，破坏了该元素。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> arr[]= &#123;<span class="number">1</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">15</span>,<span class="number">41</span>,<span class="number">34</span>,<span class="number">76</span>,<span class="number">52</span>,<span class="number">11</span>,<span class="number">2</span>,<span class="number">10</span>&#125;;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">			<span class="keyword">int</span> cur=i;</span><br><span class="line">			<span class="comment">//先将cur位置的元素备份出来</span></span><br><span class="line">			<span class="keyword">int</span> elements=arr[cur];</span><br><span class="line">			<span class="comment">//如果待插入的元素比cur前一个位置元素小，就让该元素往后移</span></span><br><span class="line">			<span class="keyword">while</span>( cur&gt;<span class="number">0</span> &amp;&amp; elements&lt;arr[cur-<span class="number">1</span>]) &#123;</span><br><span class="line">				arr[cur]=arr[cur-<span class="number">1</span>];</span><br><span class="line">				cur--;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//此时再将待插入的元素插进去。</span></span><br><span class="line">			arr[cur]=elements;</span><br><span class="line">		       &#125;</span><br><span class="line">		<span class="keyword">for</span>(Integer nums:arr) &#123;</span><br><span class="line">			System.out.println(nums);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>通过以上的分析，我们发现插入排序的时间复杂度是O(n^2) 那么这样一来也与冒泡排序和选择排序也没差别了。 接下来我们就想到一种优化思路，如果能减少寻找插入位置的次数，可以适当优化。 这时候我们想到了二分查找法。二分查找法的思想，就是通过对搜索数组进行折半，如果该元素比中间元素大，那么我们去右半部分查找。如果比中间元素小，我们去左半部分查找。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * 查找number在有序数组arr中的位置</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> number</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> begin=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> end=arr.length;</span><br><span class="line">		<span class="keyword">while</span>(begin&lt;end) &#123;</span><br><span class="line">			<span class="keyword">int</span> mid=(begin+end)/<span class="number">2</span>;</span><br><span class="line">			<span class="keyword">if</span>(number==arr[mid])</span><br><span class="line">				<span class="keyword">return</span> mid;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(number&gt;arr[mid]) &#123;</span><br><span class="line">				begin=mid+<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(number&lt;arr[mid]) &#123;</span><br><span class="line">				end=mid;</span><br><span class="line">			&#125;	</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>但是这样就暴露了一个弊端，如果该数组中没有我们需要插入的元素，我们返回的索引值是-1，这样就违背了我们的初衷，我们是需要找到一个合适的位置来插入元素，这时候我们改进我们的二分搜索算法，我们查找第一个大于该元素(上文中的number)的位置.</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * 查找number在有序数组arr中的插入位置 </span></span><br><span class="line"><span class="comment">	 * 第一个大于number的元素位置</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> number</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">newSearch</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> begin=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> end=arr.length;</span><br><span class="line">		<span class="keyword">while</span>(begin&lt;end) &#123;</span><br><span class="line">			<span class="keyword">int</span> mid=(begin+end)/<span class="number">2</span>;</span><br><span class="line">			<span class="keyword">if</span>(number&lt;arr[mid]) &#123;</span><br><span class="line">				end=mid;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				begin=mid+<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> begin;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>通过以上的方法，我们可以减少比较次数，从而找到第一个大于该元素的索引。大致实现思路还是与之前的插入排序一样， 我们通过后移元素，来腾出待插入位置。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> arr[]= &#123;<span class="number">1</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">15</span>,<span class="number">41</span>,<span class="number">34</span>,<span class="number">76</span>,<span class="number">52</span>,<span class="number">11</span>&#125;;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 找到index位置元素待插入的位置</span></span><br><span class="line"><span class="comment">	 * 已经排好序数组的区间范围是[begin,end)</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> index</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span>  <span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> number=arr[index];</span><br><span class="line">		<span class="keyword">int</span> begin=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> end=index;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span>(begin&lt;end) &#123;</span><br><span class="line">			<span class="keyword">int</span> mid=(begin+end)/<span class="number">2</span>;</span><br><span class="line">			<span class="keyword">if</span>(number&lt;arr[mid]) &#123;</span><br><span class="line">				end=mid;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				begin=mid+<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> begin;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;arr.length;i++) &#123;</span><br><span class="line">			<span class="comment">//先备份待插入的元素</span></span><br><span class="line">			<span class="keyword">int</span> temp=arr[i];</span><br><span class="line">			<span class="keyword">int</span> insertIndex=search(i);</span><br><span class="line">			<span class="comment">//将【insertIndex,i)位置的元素都向后挪一位</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&gt;insertIndex;j--) &#123;</span><br><span class="line">				arr[j]=arr[j-<span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">			arr[insertIndex]=temp;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(Integer nums:arr) &#123;</span><br><span class="line">			System.out.println(nums);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样以来，我们改进版的插入排序也就实现啦！！！</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝奶茶<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/wechat.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/29/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/03/29/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          归并排序
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/03/28/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">冒泡排序与选择排序</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -369,8 +221,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
