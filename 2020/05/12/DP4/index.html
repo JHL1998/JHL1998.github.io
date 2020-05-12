@@ -6,15 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020 | Jianhua Luo的博客</title>
+  <title>DP4 | Jianhua Luo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jianhua Luo的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2020/page/3/index.html">
+  <meta name="description" content="打家劫舍问题总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DP4">
+<meta property="og:url" content="http://yoursite.com/2020/05/12/DP4/index.html">
 <meta property="og:site_name" content="Jianhua Luo的博客">
-<meta property="og:description" content="技术博客">
+<meta property="og:description" content="打家劫舍问题总结">
+<meta property="article:published_time" content="2020-05-12T13:43:58.000Z">
+<meta property="article:modified_time" content="2020-05-12T14:30:32.957Z">
 <meta property="article:author" content="Jianhua Luo">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Jianhua Luo的博客" type="application/atom+xml">
@@ -145,139 +148,212 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-DP4" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DP4
+    </h1>
+  
+
+        
+        <a href="/2020/05/12/DP4/" class="archive-article-date">
+  	<time datetime="2020-05-12T13:43:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-12</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="打家劫舍问题总结"><a href="#打家劫舍问题总结" class="headerlink" title="打家劫舍问题总结"></a>打家劫舍问题总结</h2><a id="more"></a> 
+
+<h3 id="首先声明一点，我不一定会选择最优的解法，但是我一定会选择最容易理解的做法"><a href="#首先声明一点，我不一定会选择最优的解法，但是我一定会选择最容易理解的做法" class="headerlink" title="首先声明一点，我不一定会选择最优的解法，但是我一定会选择最容易理解的做法"></a>首先声明一点，我不一定会选择最优的解法，但是我一定会选择最容易理解的做法</h3><ul>
+<li>事实上，在dp问题的优化上，我们也只能够优化空间复杂度，即dp问题的时间复杂度是固定的</li>
+<li>而且一般最优解法比较难想，所以我们先从最容易理解的做法开始</li>
+</ul>
+<p><strong>LeetCode 198、打家劫舍 <a href="https://leetcode-cn.com/problems/house-robber/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/house-robber/</a></strong></p>
+<ul>
+<li>当我们看到这个题目的时候，首先可以看出这是一个0-1背包问题，即我们只用考虑选不选择最后一个房屋即可.</li>
+<li>那么状态转移方程可以很容易的写出来 dp[i]=max{dp[i-1],dp[i-2]+nums[i]}</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">if</span>(nums.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(nums.length==<span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> n=nums.length;</span><br><span class="line">        <span class="keyword">int</span> dp[]=<span class="keyword">new</span> <span class="keyword">int</span> [n+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//dp[0]代表只有一间房屋</span></span><br><span class="line">        dp[<span class="number">0</span>]=nums[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>]=Math.max(nums[<span class="number">0</span>],nums[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;n;i++)&#123;</span><br><span class="line">          <span class="comment">//dp[i-1]代表不选择最后一间房屋，那么另外一种情况就是选择最后一间房屋</span></span><br><span class="line">            dp[i]=Math.max(dp[i-<span class="number">1</span>],dp[i-<span class="number">2</span>]+nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>LeetCode 213、打家劫舍2 <a href="https://leetcode-cn.com/problems/house-robber-ii/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/house-robber-ii/</a></strong></p>
+<ul>
+<li>此问题与第一版不同，此时是一个环，而不是一条直线，这就意味着我们在选择第一家时，就不能选择最后一家。</li>
+<li>同理，我们如果选择了最后一家，那么就不能选择最后一家。</li>
+<li>那么我们可以分两种情况，这时就有一个有趣的地方，以往我们在做dp问题时都是一个dp数组，一维或者二维，现在这里我们可以分为两个dp数组，比较直观</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//处理边界</span></span><br><span class="line">           <span class="keyword">if</span>(nums.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n=nums.length;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">2</span>) <span class="keyword">return</span> Math.max(nums[<span class="number">0</span>],nums[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">3</span>) <span class="keyword">return</span> Math.max(Math.max(nums[<span class="number">0</span>],nums[<span class="number">1</span>]),nums[<span class="number">2</span>]);</span><br><span class="line">        <span class="comment">//如果我们选择第一家，不选最后一家</span></span><br><span class="line">        <span class="keyword">int</span> []dp1=<span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//这里选择了第一家，即只能抢劫第一家</span></span><br><span class="line">        dp1[<span class="number">0</span>]=nums[<span class="number">0</span>];</span><br><span class="line">        dp1[<span class="number">1</span>]=nums[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">//由于不选择最后一家，我们直接将最后一种情况舍弃</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;n-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            dp1[i]=Math.max(dp1[i-<span class="number">1</span>],dp1[i-<span class="number">2</span>]+nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//如果我们不选第一家，选择最后一家</span></span><br><span class="line">        <span class="keyword">int</span> dp2[]=<span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//不选第一家，那么前两个只能选择第二个</span></span><br><span class="line">        dp2[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        dp2[<span class="number">1</span>]=nums[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;n;i++)&#123;</span><br><span class="line">            dp2[i]=Math.max(dp2[i-<span class="number">1</span>],dp2[i-<span class="number">2</span>]+nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//同样的，这里在返回时也应该注意</span></span><br><span class="line">        <span class="keyword">return</span>  Math.max(dp1[n-<span class="number">2</span>],dp2[n-<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>我们可以看出，上题还是有很多细节的，如果有些地方稍微写错，那么就跑不出我们想要的答案.</li>
+</ul>
+<h4 id="接下来我们来到最后一个问题"><a href="#接下来我们来到最后一个问题" class="headerlink" title="接下来我们来到最后一个问题"></a>接下来我们来到最后一个问题</h4><p><strong>LeetCode 337、打家劫舍3 <a href="https://leetcode-cn.com/problems/house-robber-iii/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/house-robber-iii/</a></strong></p>
+<ul>
+<li>这题也很有意思，让强盗在一棵二叉树上进行打劫，并且不能选择两个相邻的节点，这里的相邻是指他们之间有连接.</li>
+<li>这里运用到了一个比较巧妙的思想，直接看代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] res=dp(root);</span><br><span class="line">        <span class="keyword">return</span> Math.max(res[<span class="number">0</span>],res[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回一个大小为2的数组，其中第一个数代表不抢根节点，第二个数代表抢根节点</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] dp(TreeNode root)&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> left[]=dp(root.left);</span><br><span class="line">        <span class="keyword">int</span> right[]=dp(root.right);</span><br><span class="line">        <span class="comment">//抢根节点，那么就不能抢根节点下一个数</span></span><br><span class="line">        <span class="keyword">int</span> rob=root.val+left[<span class="number">0</span>]+right[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">//不抢根节点</span></span><br><span class="line">        <span class="keyword">int</span> not_rob=Math.max(left[<span class="number">0</span>],left[<span class="number">1</span>])+Math.max(right[<span class="number">0</span>],right[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;not_rob,rob&#125;;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>在这里我们非常巧妙的运用了递归，事实上，与树的很多问题我们都可以用递归来解决，在利用递归时，我们不必去考虑实现的细节，在本题中，我们不必去考虑左右子树的遍历过程。而只用考虑是否选择根节点即可</li>
+</ul>
+<p>从打家劫舍1-3题，我们实现了从数组-&gt;环-&gt;树的 进阶。</p>
+<p>本篇中我所提供的代码不一定是最优解，但是一定是最容易理解的解！</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝奶茶<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/29/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-03-29T09:56:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/29/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/12/DP4/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/29/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-03-28T16:01:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-29</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/10/%E4%B8%8E%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%9C%89%E5%85%B3%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">与并查集有关的问题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/29/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/28/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F-1/" class="archive-article-date">
-  	<time datetime="2020-03-28T04:22:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/28/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F-1/">冒泡排序与选择排序</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2020/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2020/">1</a><a class="page-number" href="/archives/2020/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
   
 
 
@@ -301,8 +377,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
