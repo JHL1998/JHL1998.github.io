@@ -147,6 +147,125 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-DP5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/21/DP5/">DP5</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/21/DP5/" class="archive-article-date">
+  	<time datetime="2020-05-21T14:31:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a> 
+<h2 id="DP5"><a href="#DP5" class="headerlink" title="DP5"></a>DP5</h2><h3 id="股票问题全攻略："><a href="#股票问题全攻略：" class="headerlink" title="股票问题全攻略："></a>股票问题全攻略：</h3><p>在最开始的几道股票问题中，或许我们可以不通过DP来求解，也是很好的方法，那么我将列举出非DP套路，例如暴力法，贪心….. 但是到了后面的题目，我希望能够总结出一套DP的体系。 能够将DP灵活的运用到这几道DP问题中</p>
+<h4 id="121、买卖股票的最佳时机-https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock"><a href="#121、买卖股票的最佳时机-https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock" class="headerlink" title="121、买卖股票的最佳时机 https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/"></a>121、买卖股票的最佳时机 <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/</a></h4><ul>
+<li>首先第一题的关键词就是只能完成一笔交易</li>
+<li>我们利用暴力法，先不管只能交易一次，而是枚举出所有的交易情况，然后取最大值.注意要过滤掉负数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> cur=<span class="number">0</span>,res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">            <span class="comment">//过滤掉负数，卖出价格需要大于买入价格</span></span><br><span class="line">            cur=Math.max(<span class="number">0</span>,cur+prices[i]-prices[i-<span class="number">1</span>]);</span><br><span class="line">            res=Math.max(res,cur);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>接下来我们利用DP的思路， 这里的思路也很简单，我们只需要考虑获得最大利润时是持有股票还是卖出股票，即我们可以利用两个dp数组，与之前的打家劫舍中的一题很类似.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//在这里 hold表示持有股票的最大利润</span></span><br><span class="line">        <span class="comment">//sell表示不持有股票的最大利润</span></span><br><span class="line">           <span class="keyword">if</span>(prices.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> hold=-prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> sell=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">            hold=Math.max(hold,-prices[i]);</span><br><span class="line">            sell=Math.max(sell,hold+prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Math.max(hold,sell);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h4 id="122、买卖股票的最佳时机2-https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock-ii"><a href="#122、买卖股票的最佳时机2-https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock-ii" class="headerlink" title="122、买卖股票的最佳时机2  https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/"></a>122、买卖股票的最佳时机2  <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/</a></h4><ul>
+<li>第2题的关键词就是可以进行无数次交易(这里的无数次是指尽可能多的交易)</li>
+<li>那么这样我们就可以利用贪心的思路，如果交易的利润是正的话，我们可以一直更新结果</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices.length&lt;<span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">         <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">            res=Math.max(res,res+prices[i]-prices[i-<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>与第一题类似，在这里提供DP的做法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices.length&lt;<span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> hold=-prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> sell=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">            sell=Math.max(sell,hold+prices[i]);</span><br><span class="line">          <span class="comment">//这里可以进行多次交易</span></span><br><span class="line">            hold=Math.max(hold,sell-prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Math.max(sell,hold);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h4 id="123、买卖股票的最佳时机3-https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock-iii"><a href="#123、买卖股票的最佳时机3-https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock-iii" class="headerlink" title="123、买卖股票的最佳时机3 https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/"></a>123、买卖股票的最佳时机3 <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/</a></h4><ul>
+<li>本题的关键点是最多可以完成两笔交易</li>
+<li>有一个可行的想法是我们直接列出所有情况</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">if</span>(prices.length&lt;<span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      <span class="comment">//第一次不持有股票，第一次持有股票</span></span><br><span class="line">         <span class="keyword">int</span> firstSell=<span class="number">0</span>,firstHold=-prices[<span class="number">0</span>];</span><br><span class="line">      <span class="comment">//第二次不持有股票，第二次持有股票</span></span><br><span class="line">         <span class="keyword">int</span> secondSell=<span class="number">0</span>,secondHold=-prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">          <span class="comment">//保留或者卖出</span></span><br><span class="line">             firstSell=Math.max(firstSell,firstHold+prices[i]);</span><br><span class="line">          <span class="comment">//保留或者第一次买</span></span><br><span class="line">               firstHold=Math.max(firstHold,-prices[i]);</span><br><span class="line">            <span class="comment">//保留状态或者在前一天没有股票，然后今天买入</span></span><br><span class="line">            secondHold=Math.max(secondHold,firstSell-prices[i]);</span><br><span class="line">          <span class="comment">//保留状态或者今天卖出</span></span><br><span class="line">               secondSell=Math.max(secondSell,secondHold+prices[i]);</span><br><span class="line">               </span><br><span class="line">        &#125;</span><br><span class="line">      <span class="comment">//第二次买入的利润影响着第二次卖出的利润，即第二次卖出的利润就是最终结果</span></span><br><span class="line">        <span class="keyword">return</span> secondSell;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="188、买卖股票的最佳时机4-https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock-iv"><a href="#188、买卖股票的最佳时机4-https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock-iv" class="headerlink" title="188、买卖股票的最佳时机4 https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/"></a>188、买卖股票的最佳时机4 <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/</a></h4><ul>
+<li><p>本题就是第三题的一般形式，即最多可以进行k笔交易</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(k==<span class="number">0</span>||prices.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">         <span class="keyword">if</span>(k&gt;=prices.length/<span class="number">2</span>) <span class="keyword">return</span> greedy(prices);</span><br><span class="line">         <span class="keyword">int</span> []buy=<span class="keyword">new</span> <span class="keyword">int</span>[k];</span><br><span class="line">        <span class="keyword">int</span> [] sell=<span class="keyword">new</span> <span class="keyword">int</span>[k];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)&#123;</span><br><span class="line">            buy[i]=-prices[<span class="number">0</span>];</span><br><span class="line">            sell[i]=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="comment">//否则的话就是常规思路</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">            buy[<span class="number">0</span>]=Math.max(buy[<span class="number">0</span>],-prices[i]);</span><br><span class="line">            sell[<span class="number">0</span>]=Math.max(sell[<span class="number">0</span>],buy[<span class="number">0</span>]+prices[i]);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;k;j++)&#123;</span><br><span class="line">              <span class="comment">//在第k笔交易，如果是持有操作时，与第k-1批的 不持有有关</span></span><br><span class="line">                buy[j]=Math.max(buy[j],sell[j-<span class="number">1</span>]-prices[i]);</span><br><span class="line">              <span class="comment">//在第k笔交易时，不持有操作与当前持有操作有关</span></span><br><span class="line">                sell[j]=Math.max(sell[j],buy[j]+prices[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sell[k-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//当k很大时，我们直接利用贪心思想，即与第二种情况一样</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">greedy</span><span class="params">(<span class="keyword">int</span>[]prices)</span></span>&#123;</span><br><span class="line">         <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">            res=Math.max(res,res+prices[i]-prices[i-<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/21/DP5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-全排列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -813,80 +932,6 @@
 
 
   
-    <article id="post-链表与递归一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/13/%E9%93%BE%E8%A1%A8%E4%B8%8E%E9%80%92%E5%BD%92%E4%B8%80/">链表与递归一、</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/13/%E9%93%BE%E8%A1%A8%E4%B8%8E%E9%80%92%E5%BD%92%E4%B8%80/" class="archive-article-date">
-  	<time datetime="2020-04-13T08:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="链表与递归的渊源一"><a href="#链表与递归的渊源一" class="headerlink" title="链表与递归的渊源一"></a>链表与递归的渊源一</h2>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/13/%E9%93%BE%E8%A1%A8%E4%B8%8E%E9%80%92%E5%BD%92%E4%B8%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -980,11 +1025,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
