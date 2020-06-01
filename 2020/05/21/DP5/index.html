@@ -8,14 +8,14 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>DP5 | Jianhua Luo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="DP5股票问题全攻略：在最开始的几道股票问题中，或许我们可以不通过DP来求解，也是很好的方法，那么我将列举出非DP套路，例如暴力法，贪心….. 但是到了后面的题目，我希望能够总结出一套DP的体系。 能够将DP灵活的运用到这几道DP问题中 121、买卖股票的最佳时机 https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;best-time-to-buy-and-sell-stock&#x2F;">
+  <meta name="description" content="DP5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DP5">
 <meta property="og:url" content="http://yoursite.com/2020/05/21/DP5/index.html">
 <meta property="og:site_name" content="Jianhua Luo的博客">
-<meta property="og:description" content="DP5股票问题全攻略：在最开始的几道股票问题中，或许我们可以不通过DP来求解，也是很好的方法，那么我将列举出非DP套路，例如暴力法，贪心….. 但是到了后面的题目，我希望能够总结出一套DP的体系。 能够将DP灵活的运用到这几道DP问题中 121、买卖股票的最佳时机 https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;best-time-to-buy-and-sell-stock&#x2F;">
+<meta property="og:description" content="DP5">
 <meta property="article:published_time" content="2020-05-21T14:31:18.000Z">
-<meta property="article:modified_time" content="2020-05-21T14:32:13.773Z">
+<meta property="article:modified_time" content="2020-06-01T06:55:44.237Z">
 <meta property="article:author" content="Jianhua Luo">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -168,8 +168,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a> 
-<h2 id="DP5"><a href="#DP5" class="headerlink" title="DP5"></a>DP5</h2><h3 id="股票问题全攻略："><a href="#股票问题全攻略：" class="headerlink" title="股票问题全攻略："></a>股票问题全攻略：</h3><p>在最开始的几道股票问题中，或许我们可以不通过DP来求解，也是很好的方法，那么我将列举出非DP套路，例如暴力法，贪心….. 但是到了后面的题目，我希望能够总结出一套DP的体系。 能够将DP灵活的运用到这几道DP问题中</p>
+        <h2 id="DP5"><a href="#DP5" class="headerlink" title="DP5"></a>DP5</h2><a id="more"></a>
+
+<h3 id="股票问题全攻略："><a href="#股票问题全攻略：" class="headerlink" title="股票问题全攻略："></a>股票问题全攻略：</h3><p>在最开始的几道股票问题中，或许我们可以不通过DP来求解，也是很好的方法，那么我将列举出非DP套路，例如暴力法，贪心….. 但是到了后面的题目，我希望能够总结出一套DP的体系。 能够将DP灵活的运用到这几道DP问题中</p>
 <h4 id="121、买卖股票的最佳时机-https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock"><a href="#121、买卖股票的最佳时机-https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock" class="headerlink" title="121、买卖股票的最佳时机 https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/"></a>121、买卖股票的最佳时机 <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/</a></h4><ul>
 <li>首先第一题的关键词就是只能完成一笔交易</li>
 <li>我们利用暴力法，先不管只能交易一次，而是枚举出所有的交易情况，然后取最大值.注意要过滤掉负数</li>

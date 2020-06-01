@@ -6,18 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>DP5进阶 | Jianhua Luo的博客</title>
+  <title>Archives: 2020/6 | Jianhua Luo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对前四题进行一个总结">
-<meta property="og:type" content="article">
-<meta property="og:title" content="DP5进阶">
-<meta property="og:url" content="http://yoursite.com/2020/05/22/DP5%E8%BF%9B%E9%98%B6/index.html">
+  <meta name="description" content="技术博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jianhua Luo的博客">
+<meta property="og:url" content="http://yoursite.com/archives/2020/06/index.html">
 <meta property="og:site_name" content="Jianhua Luo的博客">
-<meta property="og:description" content="对前四题进行一个总结">
-<meta property="article:published_time" content="2020-05-22T00:38:34.000Z">
-<meta property="article:modified_time" content="2020-05-22T00:39:25.405Z">
+<meta property="og:description" content="技术博客">
 <meta property="article:author" content="Jianhua Luo">
-<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Jianhua Luo的博客" type="application/atom+xml">
@@ -148,133 +145,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-DP5进阶" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      DP5进阶
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/06/01/%E5%8F%8C%E6%8C%87%E9%92%88-%E5%A4%9A%E6%95%B0%E4%B9%8B%E5%92%8C/" class="archive-article-date">
+  	<time datetime="2020-06-01T06:56:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-01</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/06/01/%E5%8F%8C%E6%8C%87%E9%92%88-%E5%A4%9A%E6%95%B0%E4%B9%8B%E5%92%8C/">双指针-多数之和</a>
     </h1>
   
 
-        
-        <a href="/2020/05/22/DP5%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2020-05-22T00:38:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="对前四题进行一个总结"><a href="#对前四题进行一个总结" class="headerlink" title="对前四题进行一个总结"></a>对前四题进行一个总结</h2><a id="more"></a>
-
-<ul>
-<li>事实上这四种题型都是第4题的一个变体。</li>
-<li>其中第一题为k=1时的情况</li>
-<li>第二题为k=inf的情况</li>
-<li>第三题为k=2的情况</li>
-</ul>
-<p>接下来我们推出一个更加一般的形式，用一个三维dp数组来进行表示</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dp[i][k][<span class="number">0</span>] || dp[i][k][<span class="number">1</span>] </span><br><span class="line"> <span class="comment">//其中 0&lt;=i&lt;=n-1,  1&lt;=k&lt;=K  即i为在第几天进行交易，k为进行到了第几笔交易，而 第三个参数为 持有或者不持有</span></span><br><span class="line">  <span class="comment">//在这里我们定义 0为不持有， 1为持有  即我们最好的答案就是求dp[n-1][k][0]</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在这里为什么是不持有股票利润最大我想应该很好理解，[0]表示股票已经卖出去了，即利润一定大于持有股票的情况</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//今天我没有持有股票， 要么是我昨天也没有持有，即 dp[i-1][k][0] 或者是我们昨天持有然后今天卖出，即后者</span></span><br><span class="line">dp[i][k][<span class="number">0</span>]=Math.max(dp[i-<span class="number">1</span>][k][<span class="number">0</span>],dp[i-<span class="number">1</span>][k][<span class="number">1</span>]+prices[i])</span><br><span class="line">  <span class="comment">//今天我持有股票，要么是我昨天就持有股票，要么是我昨天不持有股票，然后在今天买入</span></span><br><span class="line">dp[i][k][<span class="number">1</span>]=Math.max(dp[i-<span class="number">1</span>][k][<span class="number">1</span>],dp[i-<span class="number">1</span>][k][<span class="number">0</span>]-prices[i])</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>有了上面的转移方程，我们再回过头来看看这四道题，按照惯例，我们还是从第一题开始</li>
-</ul>
-<h4 id="121、即此时就是k-1的情况"><a href="#121、即此时就是k-1的情况" class="headerlink" title="121、即此时就是k=1的情况"></a>121、即此时就是k=1的情况</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices.length&lt;<span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n=prices.length;</span><br><span class="line">        <span class="keyword">int</span> dp[][]=<span class="keyword">new</span> <span class="keyword">int</span>[n][<span class="number">2</span>];</span><br><span class="line">       </span><br><span class="line">           <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">               <span class="keyword">if</span>(i-<span class="number">1</span>==-<span class="number">1</span>)&#123;</span><br><span class="line">                   dp[i][<span class="number">1</span>]=-prices[i];</span><br><span class="line">                   <span class="keyword">continue</span>;</span><br><span class="line">               &#125;</span><br><span class="line">              dp[i][<span class="number">0</span>]=Math.max(dp[i-<span class="number">1</span>][<span class="number">0</span>],dp[i-<span class="number">1</span>][<span class="number">1</span>]+prices[i]);</span><br><span class="line">               dp[i][<span class="number">1</span>]=Math.max(dp[i-<span class="number">1</span>][<span class="number">1</span>],-prices[i]);</span><br><span class="line">           &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n-<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>很显然，如果每次我们都去处理这个边界情况，会很复杂，那么我们最好就用两个变量来代替这个dp数组，就像再最开始的那样，利用sell 和hold这个变量。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//在这里 hold表示持有股票的最大利润</span></span><br><span class="line">        <span class="comment">//sell表示不持有股票的最大利润</span></span><br><span class="line">           <span class="keyword">if</span>(prices.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> hold=-prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> sell=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">            hold=Math.max(hold,-prices[i]);</span><br><span class="line">            sell=Math.max(sell,hold+prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Math.max(hold,sell);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<h4 id="122、此时就是k-inf的情况"><a href="#122、此时就是k-inf的情况" class="headerlink" title="122、此时就是k=inf的情况"></a>122、此时就是k=inf的情况</h4> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dp[i][k][<span class="number">0</span>]=max&#123;dp[i-<span class="number">1</span>][k][<span class="number">0</span>],dp[i-<span class="number">1</span>][k][<span class="number">1</span>]+prices[i]&#125;</span><br><span class="line">dp[i][k][<span class="number">1</span>]=max&#123;dp[i-<span class="number">1</span>][k][<span class="number">1</span>],dp[i-<span class="number">1</span>][k][<span class="number">0</span>]-prices[i]&#125; </span><br><span class="line"><span class="comment">//此时我们注意到k已经没有改变了</span></span><br><span class="line"><span class="comment">//我们可以直接用二维数组进行表示</span></span><br><span class="line">dp[i][<span class="number">0</span>]=max&#123;dp[i-<span class="number">1</span>][<span class="number">0</span>],dp[i-<span class="number">1</span>][<span class="number">1</span>]+prices[i]&#125;</span><br><span class="line">dp[i][<span class="number">1</span>]=max&#123;dp[i-<span class="number">1</span>][<span class="number">1</span>],dp[i-<span class="number">1</span>][<span class="number">0</span>]-prices[i]&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>这就是我们利用最普通的三维数组进行转换的结果， 当然，这样的话我们还是要处理边界情况，非常麻烦，我们还是利用两个变量去存储这个二维数组，就像我们在最开始介绍的那样，再次不再赘述。</li>
-</ul>
-<h4 id="309、最佳买卖股票含冷冻期-k-inf-cool"><a href="#309、最佳买卖股票含冷冻期-k-inf-cool" class="headerlink" title="309、最佳买卖股票含冷冻期 k=inf+cool"></a>309、最佳买卖股票含冷冻期 k=inf+cool</h4><h4 id="https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock-with-cooldown"><a href="#https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock-with-cooldown" class="headerlink" title="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/"></a><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/</a></h4><ul>
-<li>此题的关键就是在卖出股票后，无法在第二天买入股票，并且此时这个k也是尽可能多，即k=inf</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们仿造上面的状态转移方程，只需要在这里将dp数组稍微修改一下即可</span></span><br><span class="line">dp[i][<span class="number">0</span>]=max&#123;dp[i-<span class="number">1</span>][<span class="number">0</span>],dp[i-<span class="number">1</span>][<span class="number">1</span>]+prices[i]&#125;</span><br><span class="line"><span class="comment">//注意这里如果手里持有股票， 要么是前一天就持有股票，要么是前两天不持有股票，然后今天买入，因为有一天冷冻期</span></span><br><span class="line">dp[i][<span class="number">1</span>]=max&#123;dp[i-<span class="number">1</span>][<span class="number">1</span>],dp[i-<span class="number">2</span>][<span class="number">0</span>]-prices[i]&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>同样的，我们还是利用两个变量去存储这个状态</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices.length&lt;<span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">         <span class="keyword">int</span> n=prices.length;</span><br><span class="line">         <span class="keyword">int</span> hold=-prices[<span class="number">0</span>],sell=<span class="number">0</span>;</span><br><span class="line">        <span class="comment">//用来代表冷冻期</span></span><br><span class="line">        <span class="keyword">int</span> pre=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> temp=sell;</span><br><span class="line">            hold=Math.max(hold,pre-prices[i]);</span><br><span class="line">             sell=Math.max(sell,hold+prices[i]);</span><br><span class="line">            pre=temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sell;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h4 id="714、-k-inf-free"><a href="#714、-k-inf-free" class="headerlink" title="714、 k=inf+free"></a>714、 k=inf+free</h4><h4 id="https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock-with-transaction-fee"><a href="#https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock-with-transaction-fee" class="headerlink" title="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/"></a><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//还是按照上面的思路，我们写出转移方程</span></span><br><span class="line">dp[i][<span class="number">0</span>]=max&#123;dp[i-<span class="number">1</span>][<span class="number">0</span>],dp[i-<span class="number">1</span>][<span class="number">1</span>]+prices[i]&#125;</span><br><span class="line">dp[i][<span class="number">1</span>]=max&#123;dp[i-<span class="number">1</span>][<span class="number">1</span>],dp[i-<span class="number">1</span>][<span class="number">0</span>]-prices[i]-fee&#125;</span><br><span class="line"><span class="comment">//这里的意思就是相当于我们在买入股票时需要减去一个手续费即可</span></span><br></pre></td></tr></table></figure>
-
-<p>转换成代码，可以看出来，与k=inf时没有什么区别</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices, <span class="keyword">int</span> fee)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">if</span>(prices.length&lt;<span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n=prices.length;</span><br><span class="line">        <span class="keyword">int</span> hold=-prices[<span class="number">0</span>],sell=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">            hold=Math.max(hold,sell-prices[i]);</span><br><span class="line">            sell=Math.max(sell,hold+prices[i]-fee);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sell;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="k-2-https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock-iii"><a href="#k-2-https-leetcode-cn-com-problems-best-time-to-buy-and-sell-stock-iii" class="headerlink" title="k=2 https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/"></a>k=2 <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/</a></h4><ul>
-<li><p>这个情况可能有点特殊，在之前要么k=1 要么k就是等于inf，基本都与k无关。那么在这里我们需要把k遍历一次</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[][][]dp=<span class="keyword">new</span> <span class="keyword">int</span>[n][<span class="number">2</span>+<span class="number">1</span>][<span class="number">2</span>]</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">2</span>;k&gt;=<span class="number">1</span>;k--)&#123;</span><br><span class="line">      <span class="keyword">if</span>(i-<span class="number">1</span>==-<span class="number">1</span>) &#123;base <span class="keyword">case</span>....&#125;</span><br><span class="line">      dp[i][k][<span class="number">0</span>]=Math.max(dp[i-<span class="number">1</span>][k][<span class="number">0</span>],dp[i-<span class="number">1</span>][k][<span class="number">1</span>]+prices[i])</span><br><span class="line">        dp[i][k][<span class="number">1</span>]=Math.max(dp[i-<span class="number">1</span>][k][<span class="number">1</span>],dp[i-<span class="number">1</span>][k-<span class="number">1</span>][<span class="number">0</span>]-prices[i])</span><br><span class="line">    &#125;</span><br><span class="line">      <span class="keyword">return</span> dp[n-<span class="number">1</span>][<span class="number">2</span>][<span class="number">0</span>]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>或者我们可以吧所有的情况枚举一遍，就像我们在最开始那样</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">if</span>(prices.length&lt;<span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      <span class="comment">//第一次持有或者不持有</span></span><br><span class="line">        <span class="keyword">int</span> fSell=<span class="number">0</span>,fHold=-prices[<span class="number">0</span>];</span><br><span class="line">      <span class="comment">//第二次持有或者不持有</span></span><br><span class="line">         <span class="keyword">int</span> sSell=<span class="number">0</span>,sHold=-prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">            fSell=Math.max(fSell,fHold+prices[i]);</span><br><span class="line">            fHold=Math.max(fHold,-prices[i]);</span><br><span class="line">            sHold=Math.max(sHold,fSell-prices[i]);</span><br><span class="line">            sSell=Math.max(sSell,sHold+prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sSell;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="188、k笔交易"><a href="#188、k笔交易" class="headerlink" title="188、k笔交易"></a>188、k笔交易</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(prices.length&lt;<span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">int</span> n=prices.length;</span><br><span class="line">       <span class="keyword">int</span> [][][]dp=<span class="keyword">new</span> <span class="keyword">int</span>[n][max_k+<span class="number">1</span>][<span class="number">2</span>];</span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">           <span class="keyword">for</span>(<span class="keyword">int</span> k=max_k;k&gt;=<span class="number">1</span>;k--)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i-<span class="number">1</span>==-<span class="number">1</span>)&#123;</span><br><span class="line">               dp[i][k][<span class="number">1</span>]=-prices[<span class="number">0</span>];</span><br><span class="line">               <span class="keyword">continue</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           dp[i][k][<span class="number">0</span>]=Math.max(dp[i-<span class="number">1</span>][k][<span class="number">0</span>],dp[i-<span class="number">1</span>][k][<span class="number">1</span>]+prices[i]);</span><br><span class="line">           dp[i][k][<span class="number">1</span>]=Math.max(dp[i-<span class="number">1</span>][k][<span class="number">1</span>],dp[i-<span class="number">1</span>][k-<span class="number">1</span>][<span class="number">0</span>]-prices[i]);</span><br><span class="line">           &#125;</span><br><span class="line">          </span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> dp[n-<span class="number">1</span>][max_k][<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
-
-<p>如果按照我们之前的想法，本题应该就是这样写，但是提交上去后会提示内存超了.原因是k已经破万， 那么此时就有矛盾了，买入+卖出一共需要两天，即我们最多进行5000次交易。于是在k应该要&lt;n/2 。这里我们做一个处理，复用在第二题中k=inf的情况</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span> max_k, <span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices.length&lt;<span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n=prices.length;</span><br><span class="line">        <span class="keyword">if</span>(max_k&gt;n/<span class="number">2</span>) <span class="keyword">return</span> inf_k(prices);</span><br><span class="line">        <span class="keyword">int</span> [][][]dp=<span class="keyword">new</span> <span class="keyword">int</span>[n][max_k+<span class="number">1</span>][<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=max_k;k&gt;=<span class="number">1</span>;k--)&#123;</span><br><span class="line">                 <span class="keyword">if</span>(i-<span class="number">1</span>==-<span class="number">1</span>)&#123;</span><br><span class="line">                dp[i][k][<span class="number">1</span>]=-prices[<span class="number">0</span>];</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            dp[i][k][<span class="number">0</span>]=Math.max(dp[i-<span class="number">1</span>][k][<span class="number">0</span>],dp[i-<span class="number">1</span>][k][<span class="number">1</span>]+prices[i]);</span><br><span class="line">            dp[i][k][<span class="number">1</span>]=Math.max(dp[i-<span class="number">1</span>][k][<span class="number">1</span>],dp[i-<span class="number">1</span>][k-<span class="number">1</span>][<span class="number">0</span>]-prices[i]);</span><br><span class="line">            &#125;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n-<span class="number">1</span>][max_k][<span class="number">0</span>];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//k为inf的情况</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">inf_k</span><span class="params">(<span class="keyword">int</span> prices[])</span></span>&#123;</span><br><span class="line">         <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">            res=Math.max(res,res+prices[i]-prices[i-<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>到这里，所有的股票问题都过了一遍，我们可以看到 诸如最开始的简单的两题，比如k=1或者k=inf的情况，我们可以通过暴力法直接求解，但是在这里想统一一下该类题的具体做法。我们便利用多维dp数组推导出了一般的形式，到最后为了省去边界情况的讨论，我们可以直接利用变量去代替这个dp数组.</p>
-<p>事实上股票问题也不是那么的难，对吧！</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝奶茶<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/wechat.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -286,115 +186,19 @@
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/22/DP5%E8%BF%9B%E9%98%B6/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/06/01/%E5%8F%8C%E6%8C%87%E9%92%88-%E5%A4%9A%E6%95%B0%E4%B9%8B%E5%92%8C/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          双指针-多数之和
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/05/21/DP5/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">DP5</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -417,8 +221,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
