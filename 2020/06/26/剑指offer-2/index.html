@@ -6,15 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020 | Jianhua Luo的博客</title>
+  <title>剑指offer-2 | Jianhua Luo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jianhua Luo的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2020/page/3/index.html">
+  <meta name="description" content="剑指offer day2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer-2">
+<meta property="og:url" content="http://yoursite.com/2020/06/26/%E5%89%91%E6%8C%87offer-2/index.html">
 <meta property="og:site_name" content="Jianhua Luo的博客">
-<meta property="og:description" content="技术博客">
+<meta property="og:description" content="剑指offer day2">
+<meta property="article:published_time" content="2020-06-26T08:54:35.000Z">
+<meta property="article:modified_time" content="2020-06-26T08:55:26.343Z">
 <meta property="article:author" content="Jianhua Luo">
+<meta property="article:tag" content="剑指offer">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Jianhua Luo的博客" type="application/atom+xml">
@@ -145,405 +148,266 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-剑指offer-2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      剑指offer-2
+    </h1>
+  
+
+        
+        <a href="/2020/06/26/%E5%89%91%E6%8C%87offer-2/" class="archive-article-date">
+  	<time datetime="2020-06-26T08:54:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-26</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="剑指offer-day2"><a href="#剑指offer-day2" class="headerlink" title="剑指offer day2"></a>剑指offer day2</h2><a id="more"></a>
+
+<h3 id="13、机器人的运动范围-https-leetcode-cn-com-problems-ji-qi-ren-de-yun-dong-fan-wei-lcof"><a href="#13、机器人的运动范围-https-leetcode-cn-com-problems-ji-qi-ren-de-yun-dong-fan-wei-lcof" class="headerlink" title="13、机器人的运动范围 https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/"></a>13、机器人的运动范围 <a href="https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/</a></h3><p>本题与上一题类似，是一个简单的dfs标记题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">movingCount</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span>[][]vis=<span class="keyword">new</span> <span class="keyword">boolean</span>[m][n];</span><br><span class="line">            <span class="keyword">return</span> dfs(m,n,<span class="number">0</span>,<span class="number">0</span>,k,vis);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> m,<span class="keyword">int</span> n,<span class="keyword">int</span> i,<span class="keyword">int</span> j,<span class="keyword">int</span> k,<span class="keyword">boolean</span>[][]vis)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;<span class="number">0</span>||i&gt;=m||j&lt;<span class="number">0</span>||j&gt;=n||(i/<span class="number">10</span>+i%<span class="number">10</span>+j/<span class="number">10</span>+j%<span class="number">10</span>)&gt;k||vis[i][j]==<span class="keyword">true</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        vis[i][j]=<span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">//只用往右下角走</span></span><br><span class="line">        <span class="keyword">return</span> dfs(m,n,i+<span class="number">1</span>,j,k,vis)+dfs(m,n,i,j+<span class="number">1</span>,k,vis)+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>提供一个BFS解法,BFS也是一个标准的模版.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">movingCount</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">       Queue&lt;<span class="keyword">int</span>[]&gt;queue=<span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> dx[]=&#123;<span class="number">1</span>,<span class="number">0</span>&#125;,dy[]=&#123;<span class="number">0</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">boolean</span>[][]vis=<span class="keyword">new</span> <span class="keyword">boolean</span>[m][n];</span><br><span class="line">        vis[<span class="number">0</span>][<span class="number">0</span>]=<span class="keyword">true</span>;</span><br><span class="line">        queue.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>,<span class="number">0</span>&#125;);</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">int</span> cur[]=queue.poll();</span><br><span class="line">            <span class="keyword">int</span> x=cur[<span class="number">0</span>],y=cur[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">2</span>;i++)&#123;</span><br><span class="line">                <span class="keyword">int</span> a=x+dx[i],b=y+dy[i];</span><br><span class="line">                <span class="keyword">if</span>(a&gt;=<span class="number">0</span>&amp;&amp;a&lt;=m-<span class="number">1</span>&amp;&amp;b&gt;=<span class="number">0</span>&amp;&amp;b&lt;=n-<span class="number">1</span>&amp;&amp;!vis[a][b]&amp;&amp;</span><br><span class="line">                  (a/<span class="number">10</span>+a%<span class="number">10</span>+b/<span class="number">10</span>+b%<span class="number">10</span>)&lt;=k)&#123;</span><br><span class="line">                    vis[a][b]=<span class="keyword">true</span>;</span><br><span class="line">                    res++;</span><br><span class="line">                    queue.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;a,b&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="14、剪绳子-https-leetcode-cn-com-problems-jian-sheng-zi-lcof"><a href="#14、剪绳子-https-leetcode-cn-com-problems-jian-sheng-zi-lcof" class="headerlink" title="14、剪绳子 https://leetcode-cn.com/problems/jian-sheng-zi-lcof/"></a>14、剪绳子 <a href="https://leetcode-cn.com/problems/jian-sheng-zi-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/jian-sheng-zi-lcof/</a></h3><p>题目意思很明确，给我们一根长度为n的绳子，把绳子剪成m段，使得最后的乘积最大.</p>
+<ul>
+<li>我们应该尽可能地将绳子剪为3，多余的用2补齐。</li>
+<li>如果长度为5，此时(2,3)&gt;(1,4)。</li>
+<li>如果长度为6，(3,3)&gt;(2,2,2)。</li>
+<li>往后同理，即我们最多只能留两个2，因为3段长度为2的绳子可以用两段长度为3的绳子代替</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">cuttingRope</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span>(n&lt;=<span class="number">3</span>) <span class="keyword">return</span> n-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(n%<span class="number">3</span>==<span class="number">1</span>)&#123;</span><br><span class="line">                n-=<span class="number">4</span>;</span><br><span class="line">                res*=<span class="number">4</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(n%<span class="number">3</span>==<span class="number">2</span>)&#123;</span><br><span class="line">                n-=<span class="number">2</span>;</span><br><span class="line">                res*=<span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">while</span>(n&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            n-=<span class="number">3</span>;</span><br><span class="line">            res*=<span class="number">3</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="14-2-剪绳子II-https-leetcode-cn-com-problems-jian-sheng-zi-ii-lcof"><a href="#14-2-剪绳子II-https-leetcode-cn-com-problems-jian-sheng-zi-ii-lcof" class="headerlink" title="14-2 剪绳子II https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/"></a>14-2 剪绳子II <a href="https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/</a></h3><p>思路跟上一题是一样的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">cuttingRope</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;=<span class="number">3</span>) <span class="keyword">return</span> <span class="number">1</span>*(n-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">long</span> res=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(n&gt;<span class="number">4</span>)&#123;</span><br><span class="line">             res=(res*<span class="number">3</span>)%<span class="number">1000000007</span>;</span><br><span class="line">             n-=<span class="number">3</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>) (res*n%<span class="number">1000000007</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="15、二进制中1的个数-https-leetcode-cn-com-problems-er-jin-zhi-zhong-1de-ge-shu-lcof"><a href="#15、二进制中1的个数-https-leetcode-cn-com-problems-er-jin-zhi-zhong-1de-ge-shu-lcof" class="headerlink" title="15、二进制中1的个数 https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/"></a>15、二进制中1的个数 <a href="https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/</a></h3><p>利用语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hammingWeight</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Integer.bitCount(n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>利用位运算。把一个整数减-1，然后与原来的整数做与运算，会把最右边的数字由1变成0，我们记录这个次数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hammingWeight</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">      <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">     <span class="keyword">while</span>(n!=<span class="number">0</span>)&#123;</span><br><span class="line">        res++;</span><br><span class="line">       n=n&amp;(n-<span class="number">1</span>);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> res</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="16、数值的整数次方-https-leetcode-cn-com-problems-shu-zhi-de-zheng-shu-ci-fang-lcof"><a href="#16、数值的整数次方-https-leetcode-cn-com-problems-shu-zhi-de-zheng-shu-ci-fang-lcof" class="headerlink" title="16、数值的整数次方 https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/"></a>16、数值的整数次方 <a href="https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">myPow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">if</span>(n==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> x;</span><br><span class="line">        <span class="keyword">if</span>(n==-<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>/x;</span><br><span class="line">        <span class="keyword">double</span> half=myPow(x,n/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">double</span> mod=myPow(x,n%<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> half*half*mod;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>快速幂非递归</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">myPow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x&gt;<span class="number">1</span>&amp;&amp;n==Integer.MIN_VALUE) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">           <span class="keyword">double</span> res=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> temp=Math.abs(n);</span><br><span class="line">        <span class="keyword">while</span>(temp&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(temp%<span class="number">2</span>==<span class="number">1</span>)&#123;</span><br><span class="line">                res*=x;</span><br><span class="line">            &#125;</span><br><span class="line">            x*=x;</span><br><span class="line">            temp&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n&gt;<span class="number">0</span>?res:<span class="number">1</span>/res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="17、打印从1到最大的n位数-https-leetcode-cn-com-problems-da-yin-cong-1dao-zui-da-de-nwei-shu-lcof"><a href="#17、打印从1到最大的n位数-https-leetcode-cn-com-problems-da-yin-cong-1dao-zui-da-de-nwei-shu-lcof" class="headerlink" title="17、打印从1到最大的n位数 https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/"></a>17、打印从1到最大的n位数 <a href="https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/</a></h3><p>好像这一题对原题也有改动，具体的原题不记得了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] printNumbers(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">int</span> len=(<span class="keyword">int</span>)Math.pow(<span class="number">10</span>,n)-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> res[]=<span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">            res[i]=i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="18、删除链表的节点-https-leetcode-cn-com-problems-shan-chu-lian-biao-de-jie-dian-lcof"><a href="#18、删除链表的节点-https-leetcode-cn-com-problems-shan-chu-lian-biao-de-jie-dian-lcof" class="headerlink" title="18、删除链表的节点 https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/"></a>18、删除链表的节点 <a href="https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/</a></h3><p>本题相对于剑指offer原题进行了稍加改动</p>
+<p>首先链表中各个节点的值互不相同，我们不必考虑重复节点的情况</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">deleteNode</span><span class="params">(ListNode head, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">           ListNode dummy=<span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        dummy.next=head;</span><br><span class="line">        ListNode pre=dummy;</span><br><span class="line">    <span class="keyword">while</span>(pre!=<span class="keyword">null</span>&amp;&amp;pre.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(pre.next.val==val) pre.next=pre.next.next;</span><br><span class="line">        pre=pre.next;  </span><br><span class="line">    &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>递归解法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">deleteNode</span><span class="params">(ListNode head, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span>(head==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        head.next=deleteNode(head.next,val);</span><br><span class="line">       <span class="keyword">return</span> head.val==val?head.next:head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当然，本题的原题的题意给定一个单向链表的节点指针，定义一个函数在O(1)的时间内删除该节点.</p>
+<p>假设链表一定存在，并且该节点一定不是尾节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteNode</span><span class="params">(ListNode node)</span></span>&#123;</span><br><span class="line">     <span class="comment">//如果该节点不是尾节点，那么它的下一个节点一定非空</span></span><br><span class="line">     <span class="comment">//我们可以利用下一个节点的值，把当前节点的值覆盖</span></span><br><span class="line">     node.val=node.next.val;</span><br><span class="line">     <span class="comment">//删除node的下一个节点</span></span><br><span class="line">     node.next=node.next.next;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="19、正则表达式匹配-https-leetcode-cn-com-problems-zheng-ze-biao-da-shi-pi-pei-lcof"><a href="#19、正则表达式匹配-https-leetcode-cn-com-problems-zheng-ze-biao-da-shi-pi-pei-lcof" class="headerlink" title="19、正则表达式匹配  https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/"></a>19、正则表达式匹配  <a href="https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/</a></h3><ul>
+<li>递归</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(String s,String p)</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(p.isEmpty()) <span class="keyword">return</span> s.isEmpty();</span><br><span class="line">     <span class="comment">//首字母是否匹配</span></span><br><span class="line">     <span class="keyword">boolean</span> first_match=!s.isEmpty()&amp;&amp;(s.charAt(<span class="number">0</span>)==p.charAt(<span class="number">0</span>)||p.charAt(<span class="number">0</span>)==<span class="string">'.'</span>);</span><br><span class="line">     <span class="comment">//与'*'匹配，存在两种情况</span></span><br><span class="line">     <span class="comment">//1、'*'号匹配0个字符，此时我们直接砍掉p的前两个字符</span></span><br><span class="line">     <span class="comment">//2、'*'号匹配1个或多个字符，此时我们要确认二者首字母是否匹配，然后砍掉s的首字母继续匹配</span></span><br><span class="line">    <span class="keyword">if</span>(p.length()&gt;=<span class="number">2</span>&amp;&amp;p.charAt(<span class="number">1</span>)==<span class="string">'*'</span>)&#123;</span><br><span class="line">       <span class="keyword">return</span> isMatch(s,p.substring(<span class="number">2</span>))||(first_match&amp;&amp;isMatch(s.substring(<span class="number">1</span>),p));</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="keyword">return</span> first_match&amp;&amp;isMatch(s.substring(<span class="number">1</span>),p.substring(<span class="number">1</span>));</span><br><span class="line">     </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>递归在写起代码来比较简单，但是效率属实不高，现在我们转用dp来做</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(String s,String p)</span></span>&#123;</span><br><span class="line">           <span class="keyword">boolean</span> dp[][]=<span class="keyword">new</span> <span class="keyword">boolean</span>[s.length()+<span class="number">1</span>][p.length()+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>]=<span class="keyword">true</span>;</span><br><span class="line">      <span class="comment">//当s字符串为空时</span></span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">2</span>;j&lt;=p.length();j++)&#123;</span><br><span class="line">        <span class="comment">//砍掉j的前两个字符</span></span><br><span class="line">        dp[<span class="number">0</span>][j]=p.charAt(j-<span class="number">1</span>)==<span class="string">'*'</span>&amp;&amp;dp[<span class="number">0</span>][j-<span class="number">2</span>];</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;p.length();j++)&#123;</span><br><span class="line">          <span class="keyword">if</span>(p.charAt(j)==<span class="string">'*'</span>)&#123;</span><br><span class="line">            <span class="comment">//现在的转移方程与上面的递归式子是一样的。</span></span><br><span class="line">            dp[i+<span class="number">1</span>][j+<span class="number">1</span>]=dp[i+<span class="number">1</span>][j-<span class="number">1</span>]||(first_match(s,p,i,j-<span class="number">1</span>)&amp;&amp;dp[i][j+<span class="number">1</span>]);</span><br><span class="line">          &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            dp[i+<span class="number">1</span>][j+<span class="number">1</span>]=first_match(s,p,i,j)&amp;&amp;dp[i][j];</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> dp[s.length()][p.length()];</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">first_match</span><span class="params">(String s,String p,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">          <span class="keyword">return</span> (s.charAt(i)==p.charAt(j))||(p.charAt(j)==<span class="string">'.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="20、表示数值的字符串-https-leetcode-cn-com-problems-biao-shi-shu-zhi-de-zi-fu-chuan-lcof"><a href="#20、表示数值的字符串-https-leetcode-cn-com-problems-biao-shi-shu-zhi-de-zi-fu-chuan-lcof" class="headerlink" title="20、表示数值的字符串  https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/"></a>20、表示数值的字符串  <a href="https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/</a></h3><p>个人感觉这道题是为测试人员所出的，各种奇形怪状的判定……</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isNumber</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">         <span class="comment">//去除空格</span></span><br><span class="line">        s=s.trim();</span><br><span class="line">         <span class="keyword">if</span>(s==<span class="keyword">null</span>||s.length()==<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">//第一个字符为正负号，直接去掉</span></span><br><span class="line">        <span class="keyword">if</span>(s.charAt(<span class="number">0</span>)==<span class="string">'+'</span>||s.charAt(<span class="number">0</span>)==<span class="string">'-'</span>) s=s.substring(<span class="number">1</span>);</span><br><span class="line">        <span class="comment">// +, -, .,</span></span><br><span class="line">        <span class="keyword">if</span>(s.isEmpty()||(s.charAt(<span class="number">0</span>)==<span class="string">'.'</span>&amp;&amp;s.length()==<span class="number">1</span>)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//点的数量和e的数量</span></span><br><span class="line">        <span class="keyword">int</span> dot=<span class="number">0</span>,e=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i)&gt;=<span class="string">'0'</span>&amp;&amp;s.charAt(i)&lt;=<span class="string">'9'</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(s.charAt(i)==<span class="string">'.'</span>)&#123;</span><br><span class="line">                dot++;</span><br><span class="line">                <span class="comment">//出现两个.不合法</span></span><br><span class="line">                <span class="keyword">if</span>(dot&gt;<span class="number">1</span>||e&gt;<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(s.charAt(i)==<span class="string">'e'</span>||s.charAt(i)==<span class="string">'E'</span>)&#123;</span><br><span class="line">                e++;</span><br><span class="line">                <span class="comment">//e的前后都必须要有数字</span></span><br><span class="line">                <span class="keyword">if</span>(i==<span class="number">0</span>||i==s.length()-<span class="number">1</span>||e&gt;<span class="number">1</span>||i==<span class="number">1</span>&amp;&amp;s.charAt(i-<span class="number">1</span>)==<span class="string">'.'</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                <span class="comment">//如果出现e+...的情况，则要保证后面有数字</span></span><br><span class="line">                <span class="keyword">if</span>(s.charAt(i+<span class="number">1</span>)==<span class="string">'+'</span>||s.charAt(i+<span class="number">1</span>)==<span class="string">'-'</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(i+<span class="number">2</span>==s.length()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="21、调整数组顺序使奇数位于偶数前面"><a href="#21、调整数组顺序使奇数位于偶数前面" class="headerlink" title="21、调整数组顺序使奇数位于偶数前面"></a>21、调整数组顺序使奇数位于偶数前面</h3><p>本题是一道意思很明确的题目。如果我们利用额外的空间，可以很容易的解决这个问题，例如将奇数和偶数分别放在不同的集合中，然后在顺序放入。</p>
+<p>我们也可以利用不需要额外空间复杂度的方法，我们可以利用快速排序中partation的过程，将奇数都放左边，偶数都放右边</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">      <span class="keyword">public</span> <span class="keyword">int</span> []exchange(<span class="keyword">int</span> []nums)&#123;</span><br><span class="line">            <span class="keyword">int</span> l=<span class="number">0</span>,r=nums.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(l&lt;r)&#123;</span><br><span class="line">            <span class="keyword">while</span>(l&lt;r&amp;&amp;nums[l]%<span class="number">2</span>==<span class="number">1</span>) l++;</span><br><span class="line">            <span class="keyword">while</span>(l&lt;r&amp;&amp;nums[r]%<span class="number">2</span>==<span class="number">0</span>)r--;</span><br><span class="line">           <span class="keyword">if</span>(l&lt;r)&#123;</span><br><span class="line">              <span class="keyword">int</span> temp=nums[l];</span><br><span class="line">             nums[l]=nums[r];</span><br><span class="line">             nums[r]=temp;</span><br><span class="line">             </span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝奶茶<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/06/%E8%B4%AA%E5%BF%83%E7%AD%96%E7%95%A5/" class="archive-article-date">
-  	<time datetime="2020-04-06T13:05:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/06/%E8%B4%AA%E5%BF%83%E7%AD%96%E7%95%A5/">贪心策略</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/26/%E5%89%91%E6%8C%87offer-2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/06/%E5%A0%86%E4%B8%8E%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E2%80%9D/" class="archive-article-date">
-  	<time datetime="2020-04-06T07:31:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/26/%E5%89%91%E6%8C%87offer-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">剑指offer-1</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/06/%E5%A0%86%E4%B8%8E%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E2%80%9D/">“堆与优先队列”</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/05/%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/" class="archive-article-date">
-  	<time datetime="2020-04-05T13:07:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/05/%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/">分治策略</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/01/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98%E4%BA%8C/" class="archive-article-date">
-  	<time datetime="2020-04-01T15:08:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/01/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98%E4%BA%8C/">八皇后问题二</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/01/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98%E4%B8%80/" class="archive-article-date">
-  	<time datetime="2020-04-01T14:23:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/01/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98%E4%B8%80/">八皇后问题一</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/31/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-  	<time datetime="2020-03-31T12:05:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/31/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0/">二分搜索树的实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/30/%E6%A0%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2020-03-30T13:59:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/30/%E6%A0%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">栈的基本使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/30/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-03-30T09:44:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/30/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/29/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-03-29T09:56:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/29/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/29/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-03-28T16:01:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/29/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2020/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2020/">1</a><a class="page-number" href="/archives/2020/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/2020/page/4/">4</a><a class="extend next" rel="next" href="/archives/2020/page/4/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -567,8 +431,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
