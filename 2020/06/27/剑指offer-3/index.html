@@ -6,15 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 剑指offer | Jianhua Luo的博客</title>
+  <title>剑指offer-3 | Jianhua Luo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jianhua Luo的博客">
-<meta property="og:url" content="http://yoursite.com/tags/%E5%89%91%E6%8C%87offer/index.html">
+  <meta name="description" content="剑指offer day3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer-3">
+<meta property="og:url" content="http://yoursite.com/2020/06/27/%E5%89%91%E6%8C%87offer-3/index.html">
 <meta property="og:site_name" content="Jianhua Luo的博客">
-<meta property="og:description" content="技术博客">
+<meta property="og:description" content="剑指offer day3">
+<meta property="article:published_time" content="2020-06-27T01:46:08.000Z">
+<meta property="article:modified_time" content="2020-06-27T01:47:03.644Z">
 <meta property="article:author" content="Jianhua Luo">
+<meta property="article:tag" content="剑指offer">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Jianhua Luo的博客" type="application/atom+xml">
@@ -145,36 +148,135 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-剑指offer-3" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      剑指offer-3
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/27/%E5%89%91%E6%8C%87offer-3/" class="archive-article-date">
+
+        
+        <a href="/2020/06/27/%E5%89%91%E6%8C%87offer-3/" class="archive-article-date">
   	<time datetime="2020-06-27T01:46:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-27</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/27/%E5%89%91%E6%8C%87offer-3/">剑指offer-3</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="剑指offer-day3"><a href="#剑指offer-day3" class="headerlink" title="剑指offer day3"></a>剑指offer day3</h2><a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+<h3 id="22-、链表中倒数第k个节点-https-leetcode-cn-com-problems-lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof"><a href="#22-、链表中倒数第k个节点-https-leetcode-cn-com-problems-lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof" class="headerlink" title="22 、链表中倒数第k个节点 https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/"></a>22 、链表中倒数第k个节点 <a href="https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/</a></h3><p>剑指offer中对这道题有一个隐蔽性的判断条件，即我们需要判断k是否大于0且小于链表的长度，这就意味着我们一定要遍历一遍链表，然后获得整个链表的长度。leetcode相对于更加弱化了一点，在这里我们直接利用快慢指针即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getKthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(head==<span class="keyword">null</span>||k&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        ListNode fast=head;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">      <span class="comment">//先让快指针走k步，然后当快指针到达链表尾部时，慢指针此时所在的位置就是链表中倒数第k个位置</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)&#123;</span><br><span class="line">            fast=fast.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(fast!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            fast=fast.next;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="24、反转链表-https-leetcode-cn-com-problems-fan-zhuan-lian-biao-lcof"><a href="#24、反转链表-https-leetcode-cn-com-problems-fan-zhuan-lian-biao-lcof" class="headerlink" title="24、反转链表 https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/"></a>24、反转链表 <a href="https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/</a></h3><ul>
+<li><p>递归</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span>(head==<span class="keyword">null</span>||head.next==<span class="keyword">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode newNode=reverseList(head.next);</span><br><span class="line">        head.next.next=head;</span><br><span class="line">        head.next=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">return</span> newNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>非递归</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">if</span>(head==<span class="keyword">null</span>||head.next==<span class="keyword">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">      <span class="comment">//创建一个新的头节点，遍历整个链表， 然后将其挂接</span></span><br><span class="line">        ListNode newNode=<span class="keyword">null</span>;</span><br><span class="line">        ListNode cur=head;</span><br><span class="line">        <span class="keyword">while</span>(cur!=<span class="keyword">null</span>)&#123;</span><br><span class="line">           ListNode temp=cur.next;</span><br><span class="line">          cur.next=newNode;</span><br><span class="line">            newNode=cur;</span><br><span class="line">            cur=temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> newNode;</span><br><span class="line">        </span><br><span class="line">           </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="25、合并两个排序的链表-https-leetcode-cn-com-problems-he-bing-liang-ge-pai-xu-de-lian-biao-lcof"><a href="#25、合并两个排序的链表-https-leetcode-cn-com-problems-he-bing-liang-ge-pai-xu-de-lian-biao-lcof" class="headerlink" title="25、合并两个排序的链表 https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/"></a>25、合并两个排序的链表 <a href="https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/</a></h3><p>该题类似于归并排序的最后一个步骤，merge两个排好序的数组，这里也用一样的思路来进行</p>
+<ul>
+<li>非递归</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeTwoLists</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">            ListNode dummy=<span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">           ListNode cur=dummy;</span><br><span class="line">    <span class="keyword">while</span>(l1!=<span class="keyword">null</span>&amp;&amp;l2!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(l1.val&lt;=l2.val)&#123;</span><br><span class="line">            cur.next=l1;</span><br><span class="line">            l1=l1.next;</span><br><span class="line">            cur=cur.next;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            cur.next=l2;</span><br><span class="line">            l2=l2.next;</span><br><span class="line">            cur=cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="keyword">if</span>(l1!=<span class="keyword">null</span>) cur.next=l1;</span><br><span class="line">        <span class="keyword">if</span>(l2!=<span class="keyword">null</span>) cur.next=l2;</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>递归</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeTwoLists</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span>(l1==<span class="keyword">null</span>)<span class="keyword">return</span> l2;</span><br><span class="line">           <span class="keyword">if</span>(l2==<span class="keyword">null</span>) <span class="keyword">return</span> l1;</span><br><span class="line">        <span class="keyword">if</span>(l1.val&lt;=l2.val)&#123;</span><br><span class="line">            l1.next=mergeTwoLists(l1.next,l2);</span><br><span class="line">            <span class="keyword">return</span> l1;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            l2.next=mergeTwoLists(l1,l2.next);</span><br><span class="line">            <span class="keyword">return</span> l2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="26、树的子结构-https-leetcode-cn-com-problems-shu-de-zi-jie-gou-lcof"><a href="#26、树的子结构-https-leetcode-cn-com-problems-shu-de-zi-jie-gou-lcof" class="headerlink" title="26、树的子结构 https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/"></a>26、树的子结构 <a href="https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/</a></h3><p>经典双递归</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubStructure</span><span class="params">(TreeNode A, TreeNode B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(A==<span class="keyword">null</span>||B==<span class="keyword">null</span>)<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      <span class="comment">//继续递归的判断A的左子树和A的右子树</span></span><br><span class="line">         <span class="keyword">return</span> helper(A,B)||isSubStructure(A.left,B)||isSubStructure(A.right,B);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">//辅助函数，判断B是否为A的子结构</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">helper</span><span class="params">(TreeNode A,TreeNode B)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(B==<span class="keyword">null</span>)<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(A==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(A.val!=B.val)<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> helper(A.left,B.left)&amp;&amp;helper(A.right,B.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="27、二叉树的镜像-https-leetcode-cn-com-problems-er-cha-shu-de-jing-xiang-lcof"><a href="#27、二叉树的镜像-https-leetcode-cn-com-problems-er-cha-shu-de-jing-xiang-lcof" class="headerlink" title="27、二叉树的镜像 https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/"></a>27、二叉树的镜像 <a href="https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/</a></h3><ul>
+<li><p>非递归-BFS</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">mirrorTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span>(root==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue=<span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        queue.add(root);</span><br><span class="line">        <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">int</span> n=queue.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">              <span class="comment">//在层序遍历的时候直接对左右两个节点进行交换</span></span><br><span class="line">                TreeNode cur=queue.poll();</span><br><span class="line">                TreeNode temp=cur.left;</span><br><span class="line">                cur.left=cur.right;</span><br><span class="line">                cur.right=temp;</span><br><span class="line">                <span class="keyword">if</span>(cur.left!=<span class="keyword">null</span>) queue.add(cur.left);</span><br><span class="line">                <span class="keyword">if</span>(cur.right!=<span class="keyword">null</span>) queue.add(cur.right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>  root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>递归</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">mirrorTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span>(root==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">       TreeNode left=root.left;</span><br><span class="line">        root.left=mirrorTree(root.right);</span><br><span class="line">        root.right=mirrorTree(left);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="28、对称的二叉树-https-leetcode-cn-com-problems-dui-cheng-de-er-cha-shu-lcof"><a href="#28、对称的二叉树-https-leetcode-cn-com-problems-dui-cheng-de-er-cha-shu-lcof" class="headerlink" title="28、对称的二叉树 https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/"></a>28、对称的二叉树 <a href="https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/</a></h3><p>递归判断</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">              <span class="keyword">if</span>(root==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">              <span class="keyword">return</span> helper(root,root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">helper</span><span class="params">(TreeNode s,TreeNode t)</span></span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(s==<span class="keyword">null</span>&amp;&amp;t==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(s==<span class="keyword">null</span>||t==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">if</span>(s.val!=t.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> isSame(s.left,t.right)&amp;&amp;isSame(s.right,t.left);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="29、顺时针打印矩阵-https-leetcode-cn-com-problems-shun-shi-zhen-da-yin-ju-zhen-lcof"><a href="#29、顺时针打印矩阵-https-leetcode-cn-com-problems-shun-shi-zhen-da-yin-ju-zhen-lcof" class="headerlink" title="29、顺时针打印矩阵 https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/"></a>29、顺时针打印矩阵 <a href="https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/</a></h3><p>经典搜索模拟题，碰到边界掉转方向</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] spiralOrder(<span class="keyword">int</span>[][] matrix) &#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix.length==<span class="number">0</span>||matrix[<span class="number">0</span>].length==<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line">             <span class="keyword">int</span> m=matrix.length;</span><br><span class="line">             <span class="keyword">int</span> n=matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">int</span> res[]=<span class="keyword">new</span> <span class="keyword">int</span>[m*n];</span><br><span class="line">        <span class="keyword">boolean</span>[][]vis=<span class="keyword">new</span> <span class="keyword">boolean</span>[m][n];</span><br><span class="line">        List&lt;Integer&gt;list=<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">//初始方位</span></span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">0</span>,b=<span class="number">0</span>,d=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> dx[]=&#123;-<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> dy[]=&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,-<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m*n;i++)&#123;</span><br><span class="line">            list.add(matrix[a][b]);</span><br><span class="line">             vis[a][b]=<span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">int</span> x=a+dx[d],y=b+dy[d];</span><br><span class="line">          <span class="comment">//碰到边界</span></span><br><span class="line">           <span class="keyword">if</span>(x&lt;<span class="number">0</span>||x&gt;=m||y&lt;<span class="number">0</span>||y&gt;=n||vis[x][y]==<span class="keyword">true</span>)&#123;</span><br><span class="line">               d=(d+<span class="number">1</span>)%<span class="number">4</span>;</span><br><span class="line">               x=a+dx[d];</span><br><span class="line">               y=b+dy[d];</span><br><span class="line">           &#125;</span><br><span class="line">            a=x;</span><br><span class="line">            b=y;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.size();i++)&#123;</span><br><span class="line">            res[i]=list.get(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="30、包含min函数的栈-https-leetcode-cn-com-problems-bao-han-minhan-shu-de-zhan-lcof-submissions"><a href="#30、包含min函数的栈-https-leetcode-cn-com-problems-bao-han-minhan-shu-de-zhan-lcof-submissions" class="headerlink" title="30、包含min函数的栈 https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/submissions/"></a>30、包含min函数的栈 <a href="https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/submissions/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/submissions/</a></h3><p>利用两个栈实现最小栈，辅助栈为单调栈</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MinStack</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Stack&lt;Integer&gt;stack1;</span><br><span class="line">    Stack&lt;Integer&gt;stack2;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MinStack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">           stack1=<span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">           stack2=<span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">           stack1.push(x);</span><br><span class="line">           <span class="keyword">if</span>(stack2.isEmpty()) stack2.push(x);</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            stack2.push(Math.min(x,stack2.peek()));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          stack1.pop();</span><br><span class="line">          stack2.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> stack1.peek();</span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">min</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> stack2.peek();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="31、栈的压入、弹出序列-https-leetcode-cn-com-problems-zhan-de-ya-ru-dan-chu-xu-lie-lcof"><a href="#31、栈的压入、弹出序列-https-leetcode-cn-com-problems-zhan-de-ya-ru-dan-chu-xu-lie-lcof" class="headerlink" title="31、栈的压入、弹出序列 https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/"></a>31、栈的压入、弹出序列 <a href="https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/</a></h3><p>用栈去模拟该过程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validateStackSequences</span><span class="params">(<span class="keyword">int</span>[]pushed,<span class="keyword">int</span> []popped)</span></span>&#123;</span><br><span class="line">           Stack&lt;Integer&gt;stack=<span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">           <span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> num:pushed)&#123;</span><br><span class="line">          stack.push(num);</span><br><span class="line">         <span class="comment">//当栈顶元素和出栈的第一个元素相同，将该元素弹出，指针后移，继续判断.</span></span><br><span class="line">         <span class="keyword">while</span>(j&lt;pushed.length&amp;&amp;!stack.isEmpty()&amp;&amp;stack.peek()==popped[j])&#123;</span><br><span class="line">             j++;</span><br><span class="line">             stack.pop();</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> j==pushed.length;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="32-1、从上到下打印二叉树-https-leetcode-cn-com-problems-cong-shang-dao-xia-da-yin-er-cha-shu-lcof"><a href="#32-1、从上到下打印二叉树-https-leetcode-cn-com-problems-cong-shang-dao-xia-da-yin-er-cha-shu-lcof" class="headerlink" title="32-1、从上到下打印二叉树 https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/"></a>32-1、从上到下打印二叉树 <a href="https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/</a></h3><p>BFS</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] levelOrder(TreeNode root)&#123;</span><br><span class="line">         <span class="keyword">if</span>(root==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line">       List&lt;Integer&gt;list=<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       Queue&lt;TreeNode&gt;queue=<span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">      queue.add(root);</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">           TreeNode cur=queue.poll();</span><br><span class="line">          list.add(cur.val);</span><br><span class="line">          <span class="keyword">if</span>(cur.left!=<span class="keyword">null</span>) queue.add(cur.left);</span><br><span class="line">          <span class="keyword">if</span>(cur.right!=<span class="keyword">null</span>) queue.add(cur.right);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">int</span> res[]=<span class="keyword">new</span> <span class="keyword">int</span>[list.size()];</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.size();i++)&#123;</span><br><span class="line">        res[i]=list.get(i);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝奶茶<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -186,95 +288,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/27/%E5%89%91%E6%8C%87offer-3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/26/%E5%89%91%E6%8C%87offer-2/" class="archive-article-date">
-  	<time datetime="2020-06-26T08:54:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-26</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/26/%E5%89%91%E6%8C%87offer-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">剑指offer-2</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/26/%E5%89%91%E6%8C%87offer-2/">剑指offer-2</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/26/%E5%89%91%E6%8C%87offer-1/" class="archive-article-date">
-  	<time datetime="2020-06-26T02:20:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/26/%E5%89%91%E6%8C%87offer-1/">剑指offer-1</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -297,9 +410,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
